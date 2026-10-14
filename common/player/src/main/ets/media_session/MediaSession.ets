@@ -55,6 +55,13 @@ export class MediaSessionManager {
         console.error(`Failed to invoke avsession.activate. Cause: ${JSON.stringify(error)}`);
         return;
       }
+
+      try {
+        await this.session.setExtras(({ requireAbilityList: ['url-cast'], }));
+      } catch (error) {
+        console.error(`Failed to invoke avsession.setExtras. Cause: ${JSON.stringify(error)}`);
+        return;
+      }
     }
   }
 
@@ -127,6 +134,13 @@ export class MediaSessionManager {
         await this.session.activate();
       } catch (error) {
         console.error(`Failed to invoke avsession.activate. Cause: ${JSON.stringify(error)}`);
+        return;
+      }
+
+      try {
+        await this.session.setExtras(({ requireAbilityList: ['url-cast'], }));
+      } catch (error) {
+        console.error(`Failed to invoke avsession.setExtras. Cause: ${JSON.stringify(error)}`);
         return;
       }
     }

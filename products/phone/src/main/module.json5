@@ -80,6 +80,16 @@
             "EntryAbility"
           ]
         }
+      },
+      {
+        "name": "ohos.permission.INTERNET",
+        "reason": "$string:Access_Internet_Reason",
+        "usedScene": {
+          "when": "inuse",
+          "abilities": [
+            "EntryAbility"
+          ]
+        }
       }
     ]
   }

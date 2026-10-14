@@ -23,6 +23,10 @@
     {
       "name": "Access_Biometric_Reason",
       "value": "For verify user identity"
+    },
+    {
+      "name": "Access_Internet_Reason",
+      "value": "For Audio/Video Cast"
     }
   ]
 }
