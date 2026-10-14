@@ -79,7 +79,7 @@ export struct VideoBoxView {
             Text(this.videoItem.videoName)
               .maxLines(2)
               .fontSize(14)
-              .fontColor(Color.Black)
+              .fontColor($r('sys.color.font_primary'))
               .textOverflow({ overflow: TextOverflow.Ellipsis });
 
             Row({ space: 12 }) {
@@ -88,10 +88,11 @@ export struct VideoBoxView {
                   .width(14)
                   .aspectRatio(1)
                   .draggable(false)
-                  .fillColor(Color.Gray);
+                  .fillColor($r('sys.color.font_tertiary'));
+
                 Text(this.videoItem.duration)
                   .fontSize(12)
-                  .fontColor(Color.Gray);
+                  .fontColor($r('sys.color.font_tertiary'));
               };
 
               Row({ space: 3 }) {
@@ -99,10 +100,11 @@ export struct VideoBoxView {
                   .width(14)
                   .aspectRatio(1)
                   .draggable(false)
-                  .fillColor(Color.Gray);
+                  .fillColor($r('sys.color.font_tertiary'));
+
                 Text(this.videoItem.videoSize)
                   .fontSize(12)
-                  .fontColor(Color.Gray);
+                  .fontColor($r('sys.color.font_tertiary'));
               };
             }
             .justifyContent(FlexAlign.Start);
@@ -141,7 +143,7 @@ export struct VideoBoxView {
       .height(100)
       .width('100%')
       .borderRadius(12)
-      .backgroundColor(Color.White);
+      .backgroundColor($r('sys.color.comp_background_list_card'));
     } else {
       Flex({
         direction: FlexDirection.Column,
@@ -180,7 +182,7 @@ export struct VideoBoxView {
             Text(this.videoItem.videoName)
               .maxLines(2)
               .fontSize(12)
-              .fontColor(Color.Black)
+              .fontColor($r('sys.color.font_primary'))
               .textOverflow({ overflow: TextOverflow.Ellipsis });
           }
           .width('100%')
@@ -189,11 +191,11 @@ export struct VideoBoxView {
           Row({ space: 12 }) {
             Text(this.videoItem.duration)
               .fontSize(10)
-              .fontColor(Color.Gray);
+              .fontColor($r('sys.color.font_tertiary'));
 
             Text(this.videoItem.videoSize)
               .fontSize(10)
-              .fontColor(Color.Gray);
+              .fontColor($r('sys.color.font_tertiary'));
 
             Blank();
 
@@ -202,7 +204,7 @@ export struct VideoBoxView {
                 .width(12)
                 .aspectRatio(1)
                 .draggable(false)
-                .fillColor(Color.Gray);
+                .fillColor($r('sys.color.font_tertiary'));
             }
             .width(16)
             .aspectRatio(1)
@@ -220,7 +222,7 @@ export struct VideoBoxView {
       .height(160)
       .width('100%')
       .borderRadius(12)
-      .backgroundColor(Color.White);
+      .backgroundColor($r('sys.color.comp_background_list_card'));
     }
   }
 }

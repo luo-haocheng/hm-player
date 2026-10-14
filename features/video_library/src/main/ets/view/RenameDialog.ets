@@ -31,7 +31,8 @@ export struct RenameDialog {
       Row() {
         Text('重命名')
           .fontSize(16)
-          .fontWeight(FontWeight.Bold);
+          .fontWeight(FontWeight.Bold)
+          .fontColor($r('sys.color.font_primary'));
       }
       .width('100%')
       .margin({ bottom: 12 })
@@ -59,7 +60,7 @@ export struct RenameDialog {
         .onFocus(() => {
           // Select video name
           if (this.newName) {
-            const lastDotIdx = this.newName.lastIndexOf('.')
+            const lastDotIdx = this.newName.lastIndexOf('.');
             if (lastDotIdx !== -1) {
               this.textController.setTextSelection(0, lastDotIdx);
             }

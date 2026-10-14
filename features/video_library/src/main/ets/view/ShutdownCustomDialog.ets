@@ -13,9 +13,9 @@ export struct ShutdownCustomDialog {
         Button('取消')
           .padding(0)
           .fontSize(14)
-          .fontColor(Color.Gray)
           .fontWeight(FontWeight.Bold)
           .backgroundColor(Color.Transparent)
+          .fontColor($r('sys.color.font_tertiary'))
           .onClick(() => {
             this.videoPlayerVM.shutdownOption = ShutdownOption.None;
             this.videoPlayerVM.clearShutdownDate();
@@ -25,9 +25,9 @@ export struct ShutdownCustomDialog {
         Button('确认')
           .padding(0)
           .fontSize(14)
-          .fontColor('#FF007DFF')
           .fontWeight(FontWeight.Bold)
           .backgroundColor(Color.Transparent)
+          .fontColor($r('sys.color.font_emphasize'))
           .onClick(() => {
             if (!this.result || (this.result.hour === 0 && this.result.minute === 0)) {
               this.videoPlayerVM.shutdownOption = ShutdownOption.None;
@@ -47,8 +47,8 @@ export struct ShutdownCustomDialog {
       Row({ space: 12 }) {
         Text('小时')
           .fontSize(14)
-          .fontColor('#FF007DFF')
-          .fontWeight(FontWeight.Medium);
+          .fontWeight(FontWeight.Medium)
+          .fontColor($r('sys.color.font_emphasize'));
 
         TimePicker({
           selected: new Date(0, 0, 0, 0, 0, 0),
@@ -65,8 +65,8 @@ export struct ShutdownCustomDialog {
 
         Text('分钟')
           .fontSize(14)
-          .fontColor('#FF007DFF')
-          .fontWeight(FontWeight.Medium);
+          .fontWeight(FontWeight.Medium)
+          .fontColor($r('sys.color.font_emphasize'));
       }
       .width('100%')
       .layoutWeight(1)
@@ -81,7 +81,6 @@ export struct ShutdownCustomDialog {
     })
     .width('100%')
     .height('100%')
-    .backgroundColor('#F1F3F5')
     .justifyContent(FlexAlign.Start)
     .alignItems(HorizontalAlign.Center);
   }

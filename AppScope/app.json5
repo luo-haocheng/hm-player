@@ -1,6 +1,6 @@
 {
   "app": {
-    "bundleName": "com.example.aloeplayer",
+    "bundleName": "com.example.hmplayer",
     "vendor": "example",
     "versionCode": 1000000,
     "versionName": "1.0.0",

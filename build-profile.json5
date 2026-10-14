@@ -30,11 +30,11 @@
         "material": {
           "certpath": "C:\\Users\\HaoCheng Luo\\.ohos\\config\\default_HMPlayer_uKk1wMh3AWZ5zrRZ4BZsjCg7_SqFoJVhQcquXFVwNX0=.cer",
           "keyAlias": "debugKey",
-          "keyPassword": "0000001A6A9342B10480ECB20F9C1397C7D33C2120E93C60FB99B9308AA0E5DD3C807A7023341E166C34",
+          "keyPassword": "0000001A0486B3CB25B46FE36B643673588CF9A77AAC768D2DB3AA60977D4FA90070E6FB8C3A9FE8AAB8",
           "profile": "C:\\Users\\HaoCheng Luo\\.ohos\\config\\default_HMPlayer_uKk1wMh3AWZ5zrRZ4BZsjCg7_SqFoJVhQcquXFVwNX0=.p7b",
           "signAlg": "SHA256withECDSA",
           "storeFile": "C:\\Users\\HaoCheng Luo\\.ohos\\config\\default_HMPlayer_uKk1wMh3AWZ5zrRZ4BZsjCg7_SqFoJVhQcquXFVwNX0=.p12",
-          "storePassword": "0000001A10A42012F9B3990BA5771A11383E4070E00313A1B8F29C18BC2A7D70529C915BF7D71B61EE2A"
+          "storePassword": "0000001A5CE6CCF2631823A00D835F657E2935775689EBD02B74B610B05F1FD000758A02C06B9333208E"
         }
       }
     ]

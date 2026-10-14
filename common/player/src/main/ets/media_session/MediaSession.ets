@@ -71,11 +71,13 @@ export class MediaSessionManager {
         if (audioInfo.metadata) {
           duration = await this.getMediaDuration(audioInfo.metadata);
         }
+        const filter = AVSessionMananger.ProtocolType.TYPE_CAST_PLUS_STREAM | AVSessionMananger.ProtocolType.TYPE_DLNA;
         const metadata: AVSessionMananger.AVMetadata = {
           assetId: util.generateRandomUUID(),
           title: audioInfo.title,
           mediaImage: mediaImg,
           duration: duration,
+          filter: filter,
         };
         if (audioInfo.artist) {
           metadata.artist = audioInfo.artist;
@@ -137,11 +139,13 @@ export class MediaSessionManager {
       try {
         mediaImg = await this.getMediaImage(info.thumbnailPath);
         duration = await this.getMediaDuration(info.metadata);
+        const filter = AVSessionMananger.ProtocolType.TYPE_CAST_PLUS_STREAM | AVSessionMananger.ProtocolType.TYPE_DLNA;
         let metadata: AVSessionMananger.AVMetadata = {
           assetId: util.generateRandomUUID(),
           mediaImage: mediaImg,
           duration: duration,
           title: info.name,
+          filter: filter,
         };
         await this.session.setAVMetadata(metadata);
         await this.updatePlayState(timeMs, state);

@@ -46,12 +46,12 @@ struct Index {
       Image(icon)
         .width(24)
         .aspectRatio(1)
-        .fillColor(this.selectIdx === index ? '#FF007DFF' : '#99182431');
+        .fillColor(this.selectIdx === index ? $r('sys.color.font_emphasize') : $r('sys.color.font_tertiary'));
 
       Text(name)
         .fontSize(12)
         .fontWeight(this.selectIdx === index ? 600 : 400)
-        .fontColor(this.selectIdx === index ? '#FF007DFF' : '#99182431');
+        .fontColor(this.selectIdx === index ? $r('sys.color.font_emphasize') : $r('sys.color.font_tertiary'));
     }
     .width('100%')
     .height('100%')
@@ -78,14 +78,14 @@ struct Index {
           .tabBar(this.tabBarBuilder($r('app.media.music'), '音频', 1));
         }
         .scrollable(false)
-        .barBackgroundColor('#F1F3F5')
+        .barBackgroundColor($r('sys.color.background_primary'))
         .onSelected((index: number) => {
           this.selectIdx = index;
         });
       }
       .width('100%')
       .height('100%')
-      .backgroundColor('#F1F3F5')
+      .backgroundColor($r('sys.color.background_primary'))
       .padding({ bottom: this.getUIContext().px2vp(this.bottomRectHeight) });
     }
     .id(MAIN_NAV_ID)

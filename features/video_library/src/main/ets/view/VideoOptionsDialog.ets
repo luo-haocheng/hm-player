@@ -23,7 +23,6 @@ const REPEAT_MODE_MAP: Map<VideoRepeatMode, string> = new Map([
 
 @CustomDialog
 export struct VideoOptionsDialog {
-  @Require mainPageStack: NavPathStack;
   @Link videoPlayerVM: VideoPlayerViewModel;
   private controller: CustomDialogController;
   private speedListScroller: Scroller = new Scroller();
@@ -64,11 +63,11 @@ export struct VideoOptionsDialog {
       Image(icon)
         .width(22)
         .aspectRatio(1)
-        .fillColor(Color.Black);
+        .fillColor($r('sys.color.font_primary'));
 
       Text(text)
         .fontSize(14)
-        .fontColor(Color.Black);
+        .fontColor($r('sys.color.font_primary'));
     }
     .justifyContent(FlexAlign.Start)
     .alignItems(VerticalAlign.Center);
@@ -84,7 +83,11 @@ export struct VideoOptionsDialog {
             Text(entry[1])
               .fontSize(10)
               .textAlign(TextAlign.Center)
-              .fontColor(this.videoPlayerVM.playbackSpeed === entry[0] ? '#FF007DFF' : Color.Gray);
+              .fontColor(
+                this.videoPlayerVM.playbackSpeed === entry[0] ?
+                  $r('sys.color.font_emphasize') :
+                  $r('sys.color.font_tertiary')
+              );
           }
           .width(40)
           .onClick(() => {
@@ -118,7 +121,11 @@ export struct VideoOptionsDialog {
             Text(entry[1])
               .fontSize(10)
               .textAlign(TextAlign.Center)
-              .fontColor(this.videoPlayerVM.videoRepeatMode === entry[0] ? '#FF007DFF' : Color.Gray);
+              .fontColor(
+                this.videoPlayerVM.videoRepeatMode === entry[0] ?
+                  $r('sys.color.font_emphasize') :
+                  $r('sys.color.font_tertiary')
+              );
           }
           .width(60)
           .onClick(() => {
@@ -143,42 +150,31 @@ export struct VideoOptionsDialog {
 
   build() {
     Column({ space: 16 }) {
-      Row({ space: 16 }) {
-        Column() {
-          this.optionIconBuilder($r('app.media.share'), '系统分享');
-        }
-        .width(40)
-        .height(65)
-        .onClick(() => {
-          const context = this.getUIContext().getHostContext() as common.UIAbilityContext;
-          this.videoPlayerVM.shareVideo(context);
-          this.getDialogController().close();
-        });
-
-        Column() {
-          this.optionIconBuilder($r('app.media.arrow_right_up_and_square'), '小窗播放');
-        }
-        .width(40)
-        .height(65)
-        .onClick(async () => {
-          const context = this.getUIContext().getHostContext() as Context;
-          await this.videoPlayerVM.startPip(context);
-          this.mainPageStack.pop();
-          this.controller.close();
-        });
-
-        Column() {
-          this.optionIconBuilder($r('app.media.rectangle_and_arrowshape_turn_up_right'), '系统投播');
-        }
-        .width(40)
-        .height(65)
-        .onClick(() => {
-          // todo
-        });
-      }
-      .width('100%')
-      .justifyContent(FlexAlign.Start)
-      .alignItems(VerticalAlign.Center);
+      // Row({ space: 16 }) {
+      //   Column() {
+      //     this.optionIconBuilder($r('app.media.arrow_right_up_and_square'), '小窗播放');
+      //   }
+      //   .width(40)
+      //   .height(65)
+      //   .onClick(async () => {
+      //     const context = this.getUIContext().getHostContext() as Context;
+      //     await this.videoPlayerVM.startPip(context);
+      //     this.mainPageStack.pop();
+      //     this.controller.close();
+      //   });
+      //
+      //   Column() {
+      //     this.optionIconBuilder($r('app.media.rectangle_and_arrowshape_turn_up_right'), '系统投播');
+      //   }
+      //   .width(40)
+      //   .height(65)
+      //   .onClick(() => {
+      //     // todo
+      //   });
+      // }
+      // .width('100%')
+      // .justifyContent(FlexAlign.Start)
+      // .alignItems(VerticalAlign.Center);
 
       List() {
         ListItem() {
@@ -209,15 +205,23 @@ export struct VideoOptionsDialog {
 
         ListItem() {
           Row() {
-            this.optionListItemBuilder($r('app.media.timer'), '定时关闭');
+            this.optionListItemBuilder($r('app.media.share'), '系统分享');
+          }
+          .width('100%')
+          .alignItems(VerticalAlign.Center)
+          .justifyContent(FlexAlign.SpaceBetween);
+        }
+        .padding(12)
+        .width('100%')
+        .onClick(() => {
+          const context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+          this.videoPlayerVM.shareVideo(context);
+          this.getDialogController().close();
+        });
 
-            Button({ type: ButtonType.Circle, stateEffect: false }) {
-              Image($r('app.media.chevron_right'))
-                .width(10)
-                .aspectRatio(1)
-                .fillColor(Color.Gray);
-            }
-            .backgroundColor(Color.Transparent);
+        ListItem() {
+          Row() {
+            this.optionListItemBuilder($r('app.media.timer'), '定时关闭');
           }
           .width('100%')
           .alignItems(VerticalAlign.Center)
@@ -234,29 +238,6 @@ export struct VideoOptionsDialog {
             builder: ShutdownDialog({ videoPlayerVM: this.videoPlayerVM }),
           });
           this.controller.open();
-        });
-
-        ListItem() {
-          Row() {
-            this.optionListItemBuilder($r('app.media.doc_plaintext'), '字幕设置');
-
-            Button({ type: ButtonType.Circle, stateEffect: false }) {
-              Image($r('app.media.chevron_right'))
-                .width(10)
-                .aspectRatio(1)
-                .fillColor(Color.Gray);
-            }
-            .backgroundColor(Color.Transparent);
-          }
-          .width('100%')
-          .alignItems(VerticalAlign.Center)
-          .justifyContent(FlexAlign.SpaceBetween);
-        }
-        .padding(12)
-        .width('100%')
-        .onClick(() => {
-          // todo
-          this.getDialogController().close();
         });
 
         ListItem() {
@@ -280,17 +261,15 @@ export struct VideoOptionsDialog {
       .width('100%')
       .borderRadius(8)
       .scrollBar(BarState.Off)
-      .backgroundColor(Color.White)
       .divider({
         startMargin: 50,
         strokeWidth: 0.5,
-        color: '#DCDCDC',
+        color: $r('sys.color.comp_divider'),
       });
     }
     .padding(16)
     .width('100%')
     .height('100%')
-    .backgroundColor('#F1F3F5')
     .justifyContent(FlexAlign.Start)
     .alignItems(HorizontalAlign.Center);
   }

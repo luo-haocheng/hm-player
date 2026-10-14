@@ -76,7 +76,7 @@ export struct FolderBoxView {
           .aspectRatio(16 / 9)
           .fillColor(Color.Orange)
           .objectFit(ImageFit.Contain)
-          .backgroundColor('#88F1F3F5');
+          .backgroundColor($r('sys.color.background_tertiary'));
 
         Flex({
           direction: FlexDirection.Row,
@@ -87,7 +87,7 @@ export struct FolderBoxView {
             Text(this.folderItem.folderName)
               .maxLines(2)
               .fontSize(14)
-              .fontColor(Color.Black)
+              .fontColor($r('sys.color.font_primary'))
               .textOverflow({ overflow: TextOverflow.Ellipsis });
 
             Row({ space: 3 }) {
@@ -95,11 +95,11 @@ export struct FolderBoxView {
                 .width(14)
                 .aspectRatio(1)
                 .draggable(false)
-                .fillColor(Color.Gray);
+                .fillColor($r('sys.color.font_tertiary'));
 
               Text(this.folderItem.dateAdd)
                 .fontSize(12)
-                .fontColor(Color.Gray);
+                .fontColor($r('sys.color.font_tertiary'));
             };
           }
           .height('100%')
@@ -136,12 +136,12 @@ export struct FolderBoxView {
       .height(100)
       .width('100%')
       .borderRadius(12)
-      .backgroundColor(Color.White)
+      .backgroundColor($r('sys.color.comp_background_list_card'))
       .onClick(() => {
         if (this.multiChoice) {
           this.folderItem.isChoice = !this.folderItem.isChoice;
         } else {
-          this.videoTabStack.pushPath({ name: "VideoBrowser", param: this.folderItem.folderInfo });
+          this.videoTabStack.pushPath({ name: 'VideoBrowser', param: this.folderItem.folderInfo });
         }
       });
     } else {
@@ -158,7 +158,7 @@ export struct FolderBoxView {
             .aspectRatio(16 / 9)
             .fillColor(Color.Orange)
             .objectFit(ImageFit.Contain)
-            .backgroundColor('#88F1F3F5')
+            .backgroundColor($r('sys.color.background_tertiary'))
             .borderRadius({ topLeft: 12, topRight: 12 });
 
           if (this.multiChoice) {
@@ -184,7 +184,7 @@ export struct FolderBoxView {
             Text(this.folderItem.folderName)
               .maxLines(2)
               .fontSize(12)
-              .fontColor(Color.Black)
+              .fontColor($r('sys.color.font_primary'))
               .textOverflow({ overflow: TextOverflow.Ellipsis });
           }
           .width('100%')
@@ -193,7 +193,7 @@ export struct FolderBoxView {
           Row() {
             Text(this.folderItem.dateAdd)
               .fontSize(10)
-              .fontColor(Color.Gray);
+              .fontColor($r('sys.color.font_tertiary'));
 
             Blank();
 
@@ -202,7 +202,7 @@ export struct FolderBoxView {
                 .width(12)
                 .aspectRatio(1)
                 .draggable(false)
-                .fillColor(Color.Gray);
+                .fillColor($r('sys.color.font_tertiary'));
             }
             .width(16)
             .aspectRatio(1)
@@ -220,12 +220,12 @@ export struct FolderBoxView {
       .height(160)
       .width('100%')
       .borderRadius(12)
-      .backgroundColor(Color.White)
+      .backgroundColor($r('sys.color.comp_background_list_card'))
       .onClick(() => {
         if (this.multiChoice) {
           this.folderItem.isChoice = !this.folderItem.isChoice;
         } else {
-          this.videoTabStack.pushPath({ name: "VideoBrowser", param: this.folderItem.folderInfo });
+          this.videoTabStack.pushPath({ name: 'VideoBrowser', param: this.folderItem.folderInfo });
         }
       });
     }

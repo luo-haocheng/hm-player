@@ -10,7 +10,7 @@ const BOTTOM_RECT_HEIGHT = 'BottomRectHeight';
 export default class EntryAbility extends UIAbility {
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
     try {
-      this.context.getApplicationContext().setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_LIGHT);
+      this.context.getApplicationContext().setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET);
     } catch (err) {
       hilog.error(DOMAIN, 'testTag', 'Failed to set colorMode. Cause: %{public}s', JSON.stringify(err));
     }
@@ -32,16 +32,9 @@ export default class EntryAbility extends UIAbility {
       }
       hilog.info(DOMAIN, 'testTag', 'Succeeded in loading the content.');
 
-      try {
-        this.context.setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_LIGHT);
-      } catch (error) {
-        console.error(`Failed to set color mode, error: ${JSON.stringify(error)}`);
-      }
-
       let windowClass: window.Window | undefined = undefined;
       try {
         windowClass = windowStage.getMainWindowSync();
-        windowClass.setWindowBackgroundColor('#F1F3F5');
       } catch (error) {
         console.error(`Failed to get main window, error: ${JSON.stringify(error)}`);
       }

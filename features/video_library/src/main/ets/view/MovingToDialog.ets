@@ -32,21 +32,21 @@ struct FolderBrowserView {
         .draggable(false)
         .fillColor(Color.Orange)
         .objectFit(ImageFit.Contain)
-        .backgroundColor('#88DCDCDC');
+        .backgroundColor($r('sys.color.background_tertiary'));
 
       Column() {
         Text(folderItem.folderName)
           .fontSize(16)
-          .fontColor(Color.Black);
+          .fontColor($r('sys.color.font_primary'));
 
         Row({ space: 3 }) {
           Text('创建于 ')
             .fontSize(12)
-            .fontColor(Color.Gray);
+            .fontColor($r('sys.color.font_tertiary'));
 
           Text(folderItem.dateAdd)
             .fontSize(12)
-            .fontColor(Color.Gray);
+            .fontColor($r('sys.color.font_tertiary'));
         };
       }
       .height('100%')
@@ -57,9 +57,9 @@ struct FolderBrowserView {
     .height(80)
     .width('100%')
     .borderRadius(12)
-    .backgroundColor(Color.White)
     .justifyContent(FlexAlign.Start)
-    .alignItems(VerticalAlign.Center);
+    .alignItems(VerticalAlign.Center)
+    .backgroundColor($r('sys.color.background_primary'));
   }
 
   build() {
@@ -83,13 +83,17 @@ struct FolderBrowserView {
           );
         }
         .width('100%')
-        .height('100%')
         .scrollBar(BarState.Off)
-        .divider({ strokeWidth: 8, color: '#FFF1F3F5' });
+        .backgroundColor($r('sys.color.ohos_id_list_background_color'))
+        .divider({
+          endMargin: 8,
+          startMargin: 8,
+          strokeWidth: 1,
+          color: $r('sys.color.ohos_id_divider_color')
+        });
       };
     }
     .hideBackButton(true)
-    .backgroundColor('#FFF1F3F5')
     .onReady(async (ctx: NavDestinationContext) => {
       if (ctx.pathInfo.param !== undefined) {
         this.origFolder = ctx.pathInfo.param as string;
@@ -130,10 +134,11 @@ export struct MovingToDialog {
           Image($r('app.media.arrow_left'))
             .width(20)
             .aspectRatio(1)
-            .fillColor([ROOT_PATH, SECRET_FOLDER].includes(this.moveToFolder) ? '#55000000' : Color.Black);
+            .fillColor($r('sys.color.font_primary'));
         }
         .padding(8)
-        .backgroundColor([ROOT_PATH, SECRET_FOLDER].includes(this.moveToFolder) ? '#55DCDCDC' : '#AADCDCDC')
+        .enabled(![ROOT_PATH, SECRET_FOLDER].includes(this.moveToFolder))
+        .backgroundColor($r('sys.color.button_background_color_transparent'))
         .onClick(() => {
           if ([ROOT_PATH, SECRET_FOLDER].includes(this.moveToFolder)) {
             return;
@@ -153,10 +158,11 @@ export struct MovingToDialog {
           Image($r('app.media.checkmark'))
             .width(20)
             .aspectRatio(1)
-            .fillColor(this.moveToFolder === this.origFolder ? '#55000000' : Color.Black);
+            .fillColor($r('sys.color.font_primary'));
         }
         .padding(8)
-        .backgroundColor(this.moveToFolder === this.origFolder ? '#55DCDCDC' : '#AADCDCDC')
+        .enabled(this.moveToFolder !== this.origFolder)
+        .backgroundColor($r('sys.color.button_background_color_transparent'))
         .onClick(async () => {
           if (this.moveToFolder === this.origFolder) {
             return;
@@ -181,8 +187,7 @@ export struct MovingToDialog {
     }
     .padding(16)
     .width('100%')
-    .height('100%')
-    .backgroundColor('#FFF1F3F5');
+    .height('100%');
   }
 }
 

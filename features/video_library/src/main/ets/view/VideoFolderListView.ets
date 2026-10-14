@@ -249,8 +249,10 @@ export struct VideoFolderListView {
     }
     .width('100%')
     .height('100%')
+    .contentEndOffset(8)
+    .contentStartOffset(8)
     .scrollBar(BarState.Off)
-    .divider({ strokeWidth: 8, color: '#F1F3F5' })
+    .divider({ strokeWidth: 8, color: $r('sys.color.background_secondary') })
     .lanes(this.videoViewOptions === ViewOptionValue.LIST_VIEW ? 1 : 2, 8);
   }
 }

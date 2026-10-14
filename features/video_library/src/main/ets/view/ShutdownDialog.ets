@@ -69,13 +69,13 @@ export struct ShutdownDialog {
       Row() {
         Text(this.shutdownTimeMs <= 0 ? '定时关闭' : this.shutdownTimeStr())
           .fontSize(14)
-          .fontColor(Color.Black)
-          .fontWeight(FontWeight.Bold);
+          .fontWeight(FontWeight.Bold)
+          .fontColor($r('sys.color.font_primary'));
 
         Row({ space: 3 }) {
           Text('当前视频播放完后停止')
             .fontSize(10)
-            .fontColor(Color.Gray);
+            .fontColor($r('sys.color.font_tertiary'));
 
           Toggle({ type: ToggleType.Switch, isOn: $$this.videoPlayerVM.shutdownAfterComplete })
             .width(30)
@@ -143,10 +143,10 @@ export struct ShutdownDialog {
         .width('100%')
         .borderRadius(8)
         .scrollBar(BarState.Off)
-        .backgroundColor(Color.White)
         .listDirection(Axis.Horizontal)
+        .backgroundColor($r('sys.color.background_tertiary'))
         .divider({
-          color: '#DCDCDC',
+          color: $r('sys.color.comp_divider'),
           strokeWidth: 0.5,
           startMargin: 8,
           endMargin: 8,
@@ -160,7 +160,6 @@ export struct ShutdownDialog {
     .padding(16)
     .width('100%')
     .height('100%')
-    .backgroundColor('#F1F3F5')
     .justifyContent(FlexAlign.Start)
     .alignItems(HorizontalAlign.Start);
   }

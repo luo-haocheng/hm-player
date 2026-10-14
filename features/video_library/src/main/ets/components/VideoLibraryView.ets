@@ -27,7 +27,6 @@ const IMPORT_OPTS: ImportOption[] = [
   { icon: $r('app.media.folder'), text: '文件管理导入', color: Color.Orange },
   { icon: $r('app.media.download_folder'), text: '下载目录导入', color: Color.Red },
   { icon: $r('app.media.folder_badge_plus'), text: '创建文件夹', color: Color.Green },
-  { icon: $r('app.media.question_circle'), text: '导入疑问', color: Color.Gray },
 ];
 
 interface ImportOption {
@@ -88,12 +87,13 @@ export struct VideoLibraryView {
     Row() {
       Text('排序方式')
         .fontSize(14)
-        .fontColor(Color.Black);
+        .fontColor($r('sys.color.font_primary'));
 
       Image(this.isSortExpand ? $r('app.media.chevron_up') : $r('app.media.chevron_down'))
         .width(20)
         .aspectRatio(1)
-        .backgroundColor(Color.Transparent);
+        .backgroundColor(Color.Transparent)
+        .fillColor($r('sys.color.font_primary'));
     }
     .width('100%')
     .padding({ top: 16, bottom: 16 })
@@ -113,7 +113,7 @@ export struct VideoLibraryView {
         Row() {
           Text(this.videoViewOptions === ViewOptionValue.LIST_VIEW ? '宫格视图' : '列表视图')
             .fontSize(14)
-            .fontColor(Color.Black);
+            .fontColor($r('sys.color.font_primary'));
         }
         .width('100%')
         .justifyContent(FlexAlign.Start);
@@ -139,7 +139,7 @@ export struct VideoLibraryView {
             Row({ space: 8 }) {
               Text('创建时间')
                 .fontSize(14)
-                .fontColor(Color.Black);
+                .fontColor($r('sys.color.font_primary'));
 
               if (this.videoLibVM.sortMode === SortModeValue.DATE_ADD) {
                 Image(
@@ -149,7 +149,8 @@ export struct VideoLibraryView {
                 )
                   .width(20)
                   .aspectRatio(1)
-                  .backgroundColor(Color.Transparent);
+                  .backgroundColor(Color.Transparent)
+                  .fillColor($r('sys.color.font_primary'));
               }
             }
             .width('100%')
@@ -157,8 +158,8 @@ export struct VideoLibraryView {
           }
           .width('100%')
           .margin({ left: 16 })
-          .borderColor('#DCDCDC')
           .borderWidth({ bottom: 0.5 })
+          .borderColor($r('sys.color.comp_divider'))
           .padding({ bottom: 16 })
           .onClick(() => {
             this.videoLibVM.selectSortMethod(SortModeValue.DATE_ADD);
@@ -168,7 +169,7 @@ export struct VideoLibraryView {
             Row({ space: 8 }) {
               Text('文件名称')
                 .fontSize(14)
-                .fontColor(Color.Black);
+                .fontColor($r('sys.color.font_primary'));
 
               if (this.videoLibVM.sortMode === SortModeValue.FILE_NAME) {
                 Image(
@@ -178,7 +179,8 @@ export struct VideoLibraryView {
                 )
                   .width(20)
                   .aspectRatio(1)
-                  .backgroundColor(Color.Transparent);
+                  .backgroundColor(Color.Transparent)
+                  .fillColor($r('sys.color.font_primary'));
               }
             }
             .width('100%')
@@ -186,8 +188,8 @@ export struct VideoLibraryView {
           }
           .width('100%')
           .margin({ left: 16 })
-          .borderColor('#DCDCDC')
           .borderWidth({ bottom: 0.5 })
+          .borderColor($r('sys.color.comp_divider'))
           .padding({ top: 16, bottom: 16 })
           .onClick(() => {
             this.videoLibVM.selectSortMethod(SortModeValue.FILE_NAME);
@@ -197,7 +199,7 @@ export struct VideoLibraryView {
             Row({ space: 8 }) {
               Text('文件大小')
                 .fontSize(14)
-                .fontColor(Color.Black);
+                .fontColor($r('sys.color.font_primary'));
 
               if (this.videoLibVM.sortMode === SortModeValue.FILE_SIZE) {
                 Image(
@@ -207,7 +209,8 @@ export struct VideoLibraryView {
                 )
                   .width(20)
                   .aspectRatio(1)
-                  .backgroundColor(Color.Transparent);
+                  .backgroundColor(Color.Transparent)
+                  .fillColor($r('sys.color.font_primary'));
               }
             }
             .width('100%')
@@ -227,7 +230,7 @@ export struct VideoLibraryView {
         Row() {
           Text('保险柜')
             .fontSize(14)
-            .fontColor(Color.Black);
+            .fontColor($r('sys.color.font_primary'));
         }
         .width('100%')
         .justifyContent(FlexAlign.Start);
@@ -271,12 +274,11 @@ export struct VideoLibraryView {
       });
     }
     .width(200)
+    .padding({ left: 8, right: 8 })
     .divider({
       strokeWidth: 0.5,
-      color: '#DCDCDC'
-    })
-    .padding({ left: 8, right: 8 })
-    .backgroundColor(Color.White);
+      color: $r('sys.color.comp_divider')
+    });
   }
 
   @Builder
@@ -386,14 +388,16 @@ export struct VideoLibraryView {
 
       Text(option.text)
         .fontSize(16)
-        .fontWeight(FontWeight.Normal);
+        .fontWeight(FontWeight.Normal)
+        .fontColor($r('sys.color.font_primary'));
 
       Blank();
 
       Image($r('app.media.chevron_right'))
         .width(12)
         .aspectRatio(1)
-        .backgroundColor(Color.Transparent);
+        .backgroundColor(Color.Transparent)
+        .fillColor($r('sys.color.font_primary'));
     }
     .width('100%')
     .padding({ top: 12, bottom: 12 });
@@ -405,16 +409,17 @@ export struct VideoLibraryView {
       Row() {
         Text('选择导入方式')
           .fontSize(20)
-          .fontWeight(FontWeight.Bold);
+          .fontWeight(FontWeight.Bold)
+          .fontColor($r('sys.color.font_primary'));
 
         Button({ type: ButtonType.Circle, stateEffect: false }) {
           Image($r('app.media.xmark'))
             .width(20)
             .aspectRatio(1)
-            .fillColor(Color.Black);
+            .fillColor($r('sys.color.font_primary'));
         }
         .padding(8)
-        .backgroundColor('#AADCDCDC')
+        .backgroundColor($r('sys.color.button_background_color_transparent'))
         .onClick(() => {
           try {
             this.getUIContext().getPromptAction().closeCustomDialog(this.importDialogId);
@@ -428,6 +433,37 @@ export struct VideoLibraryView {
       .justifyContent(FlexAlign.SpaceBetween);
 
       List() {
+        ListItem() {
+          this.importOptionBuilder(IMPORT_OPTS[3]);
+        }
+        .onClick(() => {
+          try {
+            this.getUIContext().getPromptAction().closeCustomDialog(this.importDialogId);
+          } catch (error) {
+            console.error(`Failed to closeCustomDailog. Cause: ${JSON.stringify(error)}`);
+          }
+          this.getUIContext()
+            .getPromptAction()
+            .openCustomDialog({
+              builder: () => {
+                this.createFolderDialogBuilder();
+              },
+              width: '90%',
+              autoCancel: false,
+              alignment: DialogAlignment.Center,
+              transition: TransitionEffect.SLIDE,
+              onWillAppear: () => {
+                this.newFolderName = undefined;
+              }
+            })
+            .then((dialogId: number) => {
+              this.createFolderDialogId = dialogId;
+            })
+            .catch((err: BusinessError) => {
+              console.error(`Failed to open create folder dialog. Cuase: ${JSON.stringify(err)}`);
+            });
+        });
+
         ListItem() {
           this.importOptionBuilder(IMPORT_OPTS[0]);
         }
@@ -463,64 +499,22 @@ export struct VideoLibraryView {
           }
           this.videoLibVM.importVideoFromDownloadDir(this.currFolder);
         });
-
-        ListItem() {
-          this.importOptionBuilder(IMPORT_OPTS[3]);
-        }
-        .onClick(() => {
-          try {
-            this.getUIContext().getPromptAction().closeCustomDialog(this.importDialogId);
-          } catch (error) {
-            console.error(`Failed to closeCustomDailog. Cause: ${JSON.stringify(error)}`);
-          }
-          this.getUIContext()
-            .getPromptAction()
-            .openCustomDialog({
-              builder: () => {
-                this.createFolderDialogBuilder();
-              },
-              width: '90%',
-              autoCancel: false,
-              alignment: DialogAlignment.Center,
-              transition: TransitionEffect.SLIDE,
-              onWillAppear: () => {
-                this.newFolderName = undefined;
-              }
-            })
-            .then((dialogId: number) => {
-              this.createFolderDialogId = dialogId;
-            })
-            .catch((err: BusinessError) => {
-              console.error(`Failed to open create folder dialog. Cuase: ${JSON.stringify(err)}`);
-            });
-        });
-
-        ListItem() {
-          this.importOptionBuilder(IMPORT_OPTS[4]);
-        }
-        .onClick(() => {
-          try {
-            this.getUIContext().getPromptAction().closeCustomDialog(this.importDialogId);
-          } catch (error) {
-            console.error(`Failed to closeCustomDailog. Cause: ${JSON.stringify(error)}`);
-          }
-          // todo
-        });
       }
       .width('100%')
       .scrollBar(BarState.Off)
-      .divider({ strokeWidth: 1, startMargin: 46, color: 'rgb(240, 240, 240)' });
+      .divider({ strokeWidth: 1, startMargin: 46, color: $r('sys.color.comp_divider') });
     }
     .padding(16);
   }
 
   @Builder
-  ChoiceOptionBuilder(icon: ResourceStr, name: ResourceStr, color: Color, callback: Callback<void>) {
+  ChoiceOptionBuilder(icon: ResourceStr, name: ResourceStr, color: ResourceColor, callback: Callback<void>) {
     Column({ space: 2 }) {
       Image(icon)
         .width(24)
         .aspectRatio(1)
         .fillColor(color);
+
       Text(name)
         .fontSize(12)
         .fontColor(color);
@@ -537,52 +531,57 @@ export struct VideoLibraryView {
   @Builder
   multiChoiceBuilder() {
     Row() {
-      this.ChoiceOptionBuilder($r('app.media.trash'), '删除', Color.Red, () => {
-        emitter.emit(DELETE_CHOICE_EVENT);
-        try {
-          this.getUIContext().getPromptAction().closeCustomDialog(this.multiChoiceDialogId);
-        } catch (error) {
-          console.error(`Failed to closeCustomDailog. Cause: ${JSON.stringify(error)}`);
-        }
-      });
+      this.ChoiceOptionBuilder($r('app.media.trash'), '删除', Color.Red,
+        () => {
+          emitter.emit(DELETE_CHOICE_EVENT);
+          try {
+            this.getUIContext().getPromptAction().closeCustomDialog(this.multiChoiceDialogId);
+          } catch (error) {
+            console.error(`Failed to closeCustomDailog. Cause: ${JSON.stringify(error)}`);
+          }
+        });
 
-      this.ChoiceOptionBuilder($r('app.media.arrow_right_folder_circle'), '移动', Color.Black, () => {
-        emitter.emit(MOVE_CHOICE_EVENT);
-        try {
-          this.getUIContext().getPromptAction().closeCustomDialog(this.multiChoiceDialogId);
-        } catch (error) {
-          console.error(`Failed to closeCustomDailog. Cause: ${JSON.stringify(error)}`);
-        }
-      });
+      this.ChoiceOptionBuilder($r('app.media.arrow_right_folder_circle'), '移动', $r('sys.color.font_primary'),
+        () => {
+          emitter.emit(MOVE_CHOICE_EVENT);
+          try {
+            this.getUIContext().getPromptAction().closeCustomDialog(this.multiChoiceDialogId);
+          } catch (error) {
+            console.error(`Failed to closeCustomDailog. Cause: ${JSON.stringify(error)}`);
+          }
+        });
 
       if (this.inSecretFolder) {
-        this.ChoiceOptionBuilder($r('app.media.lock_open'), '移出', Color.Black, () => {
-          emitter.emit(MOVE_SECRET_EVENT);
-          try {
-            this.getUIContext().getPromptAction().closeCustomDialog(this.multiChoiceDialogId);
-          } catch (error) {
-            console.error(`Failed to closeCustomDailog. Cause: ${JSON.stringify(error)}`);
-          }
-        });
+        this.ChoiceOptionBuilder($r('app.media.lock_open'), '移出', $r('sys.color.font_primary'),
+          () => {
+            emitter.emit(MOVE_SECRET_EVENT);
+            try {
+              this.getUIContext().getPromptAction().closeCustomDialog(this.multiChoiceDialogId);
+            } catch (error) {
+              console.error(`Failed to closeCustomDailog. Cause: ${JSON.stringify(error)}`);
+            }
+          });
       } else {
-        this.ChoiceOptionBuilder($r('app.media.lock'), '保险柜', Color.Black, () => {
-          emitter.emit(MOVE_SECRET_EVENT);
-          try {
-            this.getUIContext().getPromptAction().closeCustomDialog(this.multiChoiceDialogId);
-          } catch (error) {
-            console.error(`Failed to closeCustomDailog. Cause: ${JSON.stringify(error)}`);
-          }
-        });
+        this.ChoiceOptionBuilder($r('app.media.lock'), '保险柜', $r('sys.color.font_primary'),
+          () => {
+            emitter.emit(MOVE_SECRET_EVENT);
+            try {
+              this.getUIContext().getPromptAction().closeCustomDialog(this.multiChoiceDialogId);
+            } catch (error) {
+              console.error(`Failed to closeCustomDailog. Cause: ${JSON.stringify(error)}`);
+            }
+          });
       }
 
-      this.ChoiceOptionBuilder($r('app.media.share'), '分享', Color.Black, () => {
-        emitter.emit(SHARE_CHOICE_EVENT);
-        try {
-          this.getUIContext().getPromptAction().closeCustomDialog(this.multiChoiceDialogId);
-        } catch (error) {
-          console.error(`Failed to closeCustomDailog. Cause: ${JSON.stringify(error)}`);
-        }
-      });
+      this.ChoiceOptionBuilder($r('app.media.share'), '分享', $r('sys.color.font_primary'),
+        () => {
+          emitter.emit(SHARE_CHOICE_EVENT);
+          try {
+            this.getUIContext().getPromptAction().closeCustomDialog(this.multiChoiceDialogId);
+          } catch (error) {
+            console.error(`Failed to closeCustomDailog. Cause: ${JSON.stringify(error)}`);
+          }
+        });
     }
     .width('100%')
     .height('100%')
@@ -605,11 +604,11 @@ export struct VideoLibraryView {
                 Image($r('app.media.back'))
                   .width(14)
                   .aspectRatio(1)
-                  .fillColor(Color.Black);
+                  .fillColor($r('sys.color.font_primary'));
               }
               .width(36)
               .aspectRatio(1)
-              .backgroundColor('#AADCDCDC')
+              .backgroundColor($r('sys.color.background_tertiary'))
               .onClick(() => {
                 this.videoTabStack.pop();
               });
@@ -619,8 +618,8 @@ export struct VideoLibraryView {
               .maxLines(1)
               .fontSize(20)
               .layoutWeight(1)
-              .fontColor(Color.Black)
               .fontWeight(FontWeight.Bold)
+              .fontColor($r('sys.color.font_primary'))
               .textOverflow({ overflow: TextOverflow.Ellipsis });
           }
           .layoutWeight(1);
@@ -629,11 +628,11 @@ export struct VideoLibraryView {
             Button({ type: ButtonType.Capsule, stateEffect: false }) {
               Text('多选')
                 .fontSize(14)
-                .fontColor(Color.Black);
+                .fontColor($r('sys.color.font_primary'));
             }
             .width(36 * 1.5)
             .aspectRatio(1.5)
-            .backgroundColor('#AADCDCDC')
+            .backgroundColor($r('sys.color.background_tertiary'))
             .onClick(() => {
               this.getUIContext()
                 .getPromptAction()
@@ -670,11 +669,11 @@ export struct VideoLibraryView {
                 Image($r('app.media.plus'))
                   .width(24)
                   .aspectRatio(1)
-                  .fillColor(Color.Black);
+                  .fillColor($r('sys.color.font_primary'));
               }
               .width(36)
               .aspectRatio(1)
-              .backgroundColor('#AADCDCDC')
+              .backgroundColor($r('sys.color.background_tertiary'))
               .onClick(() => {
                 this.getUIContext()
                   .getPromptAction()
@@ -699,11 +698,11 @@ export struct VideoLibraryView {
                 Image($r('app.media.dot_grid_2x2'))
                   .width(24)
                   .aspectRatio(1)
-                  .fillColor(Color.Black);
+                  .fillColor($r('sys.color.font_primary'));
               }
               .width(36)
               .aspectRatio(1)
-              .backgroundColor('#AADCDCDC')
+              .backgroundColor($r('sys.color.background_tertiary'))
               .bindMenu(
                 this.moreOptionsBuilder,
                 {
@@ -719,7 +718,7 @@ export struct VideoLibraryView {
         .padding(16)
         .width('100%')
         .alignItems(VerticalAlign.Center)
-        .justifyContent(FlexAlign.SpaceBetween)
+        .justifyContent(FlexAlign.SpaceBetween);
       } else {
         Row() {
           Row({ space: 12 }) {
@@ -727,11 +726,11 @@ export struct VideoLibraryView {
               Image($r('app.media.xmark'))
                 .width(24)
                 .aspectRatio(1)
-                .fillColor(Color.Black);
+                .fillColor($r('sys.color.font_primary'));
             }
             .width(36)
             .aspectRatio(1)
-            .backgroundColor('#AADCDCDC')
+            .backgroundColor($r('sys.color.background_tertiary'))
             .onClick(() => {
               try {
                 this.getUIContext().getPromptAction().closeCustomDialog(this.multiChoiceDialogId);
@@ -742,18 +741,18 @@ export struct VideoLibraryView {
 
             Text(this.choiceCount === 0 ? '未选择' : `已选择 ${this.choiceCount} 项`)
               .fontSize(18)
-              .fontColor(Color.Black)
-              .fontWeight(FontWeight.Bold);
+              .fontWeight(FontWeight.Bold)
+              .fontColor($r('sys.color.font_primary'));
           };
 
           Button({ type: ButtonType.Capsule, stateEffect: false }) {
             Text(this.choiceAll ? '全选' : '取消全选')
               .fontSize(14)
-              .fontColor(Color.Black);
+              .fontColor($r('sys.color.font_primary'));
           }
           .width(36 * (this.choiceAll ? 1.5 : 2))
           .aspectRatio(this.choiceAll ? 1.5 : 2)
-          .backgroundColor('#AADCDCDC')
+          .backgroundColor($r('sys.color.background_tertiary'))
           .onClick(() => {
             let eventData: emitter.EventData = {
               data: {
@@ -767,7 +766,7 @@ export struct VideoLibraryView {
         .padding(16)
         .width('100%')
         .alignItems(VerticalAlign.Center)
-        .justifyContent(FlexAlign.SpaceBetween)
+        .justifyContent(FlexAlign.SpaceBetween);
       }
 
       Navigation(this.videoTabStack, { name: 'VideoBrowser' })

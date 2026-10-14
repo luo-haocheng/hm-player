@@ -4,6 +4,7 @@ import { window } from '@kit.ArkUI';
 import { media } from '@kit.MediaKit';
 import { AVVolumePanel } from '@kit.AudioKit';
 import { VideoOptionsDialog } from './VideoOptionsDialog';
+import { AVCastPicker } from '@kit.AVSessionKit';
 
 @Builder
 export function VideoPlayerBuilder() {
@@ -151,7 +152,7 @@ export struct VideoPlayerView {
               Image($r('app.media.back'))
                 .width(20)
                 .aspectRatio(1)
-                .fillColor(Color.Gray);
+                .fillColor(Color.White);
             }
             .backgroundColor(Color.Transparent)
             .onClick(() => {
@@ -159,33 +160,55 @@ export struct VideoPlayerView {
               this.videoPlayerVM.release();
             });
 
-            Button({ type: ButtonType.Circle, stateEffect: false }) {
-              Image($r('app.media.dot_grid_2x2'))
-                .width(28)
-                .aspectRatio(1)
-                .fillColor(Color.Gray);
-            }
-            .backgroundColor(Color.Transparent)
-            .onClick(() => {
-              if (this.videoPlayerVM.isLandscape) {
-                this.videoOptionsDialogCtrl = new CustomDialogController({
-                  width: '45%',
-                  height: '100%',
-                  alignment: DialogAlignment.TopEnd,
-                  cornerRadius: { topLeft: 24, bottomLeft: 24 },
-                  builder: VideoOptionsDialog({ mainPageStack: this.mainPathStack, videoPlayerVM: this.videoPlayerVM }),
-                });
-              } else {
-                this.videoOptionsDialogCtrl = new CustomDialogController({
-                  width: '100%',
-                  height: '45%',
-                  alignment: DialogAlignment.Bottom,
-                  cornerRadius: { topLeft: 24, topRight: 24 },
-                  builder: VideoOptionsDialog({ mainPageStack: this.mainPathStack, videoPlayerVM: this.videoPlayerVM }),
-                });
+            Row({ space: 16 }) {
+              AVCastPicker({
+                normalColor: Color.White,
+                sessionType: 'video'
+              })
+                .width(24)
+                .aspectRatio(1);
+
+              Button({ type: ButtonType.Circle, stateEffect: false }) {
+                Image($r('app.media.arrow_right_up_and_square'))
+                  .width(24)
+                  .aspectRatio(1)
+                  .fillColor(Color.White);
               }
-              this.videoOptionsDialogCtrl.open();
-            });
+              .backgroundColor(Color.Transparent)
+              .onClick(async () => {
+                const context = this.getUIContext().getHostContext() as Context;
+                await this.videoPlayerVM.startPip(context);
+                this.mainPathStack.pop();
+              });
+
+              Button({ type: ButtonType.Circle, stateEffect: false }) {
+                Image($r('app.media.dot_grid_2x2'))
+                  .width(28)
+                  .aspectRatio(1)
+                  .fillColor(Color.White);
+              }
+              .backgroundColor(Color.Transparent)
+              .onClick(() => {
+                if (this.videoPlayerVM.isLandscape) {
+                  this.videoOptionsDialogCtrl = new CustomDialogController({
+                    width: '45%',
+                    height: '100%',
+                    alignment: DialogAlignment.TopEnd,
+                    cornerRadius: { topLeft: 24, bottomLeft: 24 },
+                    builder: VideoOptionsDialog({ videoPlayerVM: this.videoPlayerVM }),
+                  });
+                } else {
+                  this.videoOptionsDialogCtrl = new CustomDialogController({
+                    width: '100%',
+                    height: '35%',
+                    alignment: DialogAlignment.Bottom,
+                    cornerRadius: { topLeft: 24, topRight: 24 },
+                    builder: VideoOptionsDialog({ videoPlayerVM: this.videoPlayerVM }),
+                  });
+                }
+                this.videoOptionsDialogCtrl.open();
+              });
+            };
           }
           .width('100%')
           .padding({ left: 16, right: 16 })
@@ -198,10 +221,10 @@ export struct VideoPlayerView {
               Image(this.videoPlayerVM.isLocking ? $r('app.media.lock') : $r('app.media.lock_open'))
                 .width(20)
                 .aspectRatio(1)
-                .fillColor(Color.Gray);
+                .fillColor(Color.White);
             }
             .padding(8)
-            .backgroundColor('#33FFFFFF')
+            .backgroundColor($r('sys.color.button_background_color_transparent'))
             .onClick(() => {
               this.videoPlayerVM.isLocking = !this.videoPlayerVM.isLocking;
             });
@@ -216,20 +239,22 @@ export struct VideoPlayerView {
               Row() {
                 Text(`${this.timeStr(this.videoPlayerVM.currTime)} / ${this.timeStr(this.videoPlayerVM.duration)}`)
                   .fontSize(10)
-                  .fontColor(this.videoPlayerVM.isSeeking ? Color.White : Color.Gray);
+                  .fontColor(Color.White);
               }
               .width('100%')
-              .justifyContent(FlexAlign.End);
+              .justifyContent(FlexAlign.End)
+              .padding({ left: 6, right: 6 });
 
               Slider({
                 min: 0,
                 max: this.videoPlayerVM.duration,
                 value: this.videoPlayerVM.currTime,
-                style: SliderStyle.NONE,
+                style: SliderStyle.OutSet,
               })
                 .height(8)
                 .width('100%')
                 .trackColor('#33FFFFFF')
+                .blockSize({ width: 12, height: 12 })
                 .trackThickness(this.videoPlayerVM.isSeeking ? 8 : 5)
                 .selectedColor(this.videoPlayerVM.isSeeking ? Color.White : Color.Gray)
                 .onChange((value: number, mode: SliderChangeMode) => {
@@ -251,7 +276,7 @@ export struct VideoPlayerView {
                   Image(this.videoPlayerVM.isPlaying ? $r('app.media.pause') : $r('app.media.play'))
                     .width(30)
                     .aspectRatio(1)
-                    .fillColor(Color.Gray);
+                    .fillColor(Color.White);
                 }
                 .backgroundColor(Color.Transparent)
                 .onClick(async () => {
@@ -268,7 +293,7 @@ export struct VideoPlayerView {
                     Image($r('app.media.forward_end_fill'))
                       .width(30)
                       .aspectRatio(1)
-                      .fillColor(Color.Gray);
+                      .fillColor(Color.White);
                   }
                   .backgroundColor(Color.Transparent)
                   .onClick(async () => {
@@ -286,7 +311,7 @@ export struct VideoPlayerView {
                 )
                   .width(24)
                   .aspectRatio(1)
-                  .fillColor(Color.Gray);
+                  .fillColor(Color.White);
               }
               .backgroundColor(Color.Transparent)
               .onClick(() => {
@@ -299,6 +324,7 @@ export struct VideoPlayerView {
               });
             }
             .width('100%')
+            .padding({ left: 6, right: 6 })
             .alignItems(VerticalAlign.Center)
             .justifyContent(FlexAlign.SpaceBetween);
 
