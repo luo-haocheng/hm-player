@@ -73,8 +73,8 @@ struct AudioLandscapeView {
               })
                 .height(24)
                 .width('100%')
-                .trackColor('#22000000')
-                .selectedColor(Color.Black)
+                .selectedColor($r('sys.color.font_primary'))
+                .trackColor($r('sys.color.progress_track_color'))
                 .trackThickness(this.audioPlayerVM.isSeeking ? 6 : 3)
                 .onChange(async (value: number, mode: SliderChangeMode) => {
                   if (mode === SliderChangeMode.Begin) {
@@ -111,15 +111,15 @@ struct AudioLandscapeView {
             Row() {
               Text(this.timeStr(this.audioPlayerVM.currTime) + '/' + this.timeStr(this.audioPlayerVM.duration))
                 .fontSize(16)
-                .fontColor(Color.Gray)
-                .fontWeight(FontWeight.Bold);
+                .fontWeight(FontWeight.Bold)
+                .fontColor($r('sys.color.font_tertiary'));
 
               Row() {
                 Button({ type: ButtonType.Circle, stateEffect: false }) {
                   Image($r('app.media.backward_end_fill'))
                     .width(36)
                     .aspectRatio(1)
-                    .fillColor(Color.Black);
+                    .fillColor($r('sys.color.font_primary'));
                 }
                 .backgroundColor(Color.Transparent)
                 .onClick(async () => {
@@ -131,7 +131,7 @@ struct AudioLandscapeView {
                   Image(this.audioPlayerVM.isPlaying ? $r('app.media.pause') : $r('app.media.play'))
                     .width(36)
                     .aspectRatio(1)
-                    .fillColor(Color.Black);
+                    .fillColor($r('sys.color.font_primary'));
                 }
                 .backgroundColor(Color.Transparent)
                 .onClick(async () => {
@@ -147,7 +147,7 @@ struct AudioLandscapeView {
                   Image($r('app.media.forward_end_fill'))
                     .width(36)
                     .aspectRatio(1)
-                    .fillColor(Color.Black);
+                    .fillColor($r('sys.color.font_primary'));
                 }
                 .backgroundColor(Color.Transparent)
                 .onClick(async () => {
@@ -164,7 +164,11 @@ struct AudioLandscapeView {
                 Image(this.audioPlayerVM.isFavorite ? $r('app.media.heart_fill') : $r('app.media.heart'))
                   .width(28)
                   .aspectRatio(1)
-                  .fillColor(this.audioPlayerVM.isFavorite ? Color.Black : Color.Gray);
+                  .fillColor(
+                    this.audioPlayerVM.isFavorite ?
+                      $r('sys.color.font_primary') :
+                      $r('sys.color.font_tertiary')
+                  );
               }
               .backgroundColor(Color.Transparent)
               .onClick(async () => {
@@ -197,7 +201,7 @@ struct AudioLandscapeView {
             Image($r('app.media.back'))
               .width(20)
               .aspectRatio(1)
-              .fillColor(Color.White);
+              .fillColor($r('sys.color.font_primary'));
           }
           .backgroundColor(Color.Transparent)
           .onClick(() => {
@@ -211,10 +215,10 @@ struct AudioLandscapeView {
           bottom: 16,
         })
         .width('100%')
-        .backgroundColor(`#11000000`)
         .justifyContent(FlexAlign.Start)
         .alignItems(VerticalAlign.Center)
-        .visibility(this.isTopBarShow ? Visibility.Visible : Visibility.Hidden);
+        .visibility(this.isTopBarShow ? Visibility.Visible : Visibility.Hidden)
+        .backgroundColor($r('sys.color.segment_button_v2_tab_button_background'));
       }
       .width('100%')
       .height('100%')
@@ -224,7 +228,6 @@ struct AudioLandscapeView {
       });
     }
     .hideBackButton(true)
-    .backgroundColor('#F1F3F5')
     .onReady((navContext: NavDestinationContext) => {
       this.mainPathStack = navContext.pathStack;
     })

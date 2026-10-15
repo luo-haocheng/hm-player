@@ -58,8 +58,7 @@ struct FolderBrowserView {
     .width('100%')
     .borderRadius(12)
     .justifyContent(FlexAlign.Start)
-    .alignItems(VerticalAlign.Center)
-    .backgroundColor($r('sys.color.background_primary'));
+    .alignItems(VerticalAlign.Center);
   }
 
   build() {
@@ -73,7 +72,7 @@ struct FolderBrowserView {
                 this.folderItemBuilder(item);
               }
               .onClick(() => {
-                this.moveNavPath.pushPath({ name: 'FolderBrowser', param: item.folderInfo.path });
+                this.moveNavPath.pushPath({ name: 'FolderBrowser', param: item.folderInfo.path }, false);
               });
             },
             (item: FolderItemViewModel, index: number) => {
@@ -84,16 +83,16 @@ struct FolderBrowserView {
         }
         .width('100%')
         .scrollBar(BarState.Off)
-        .backgroundColor($r('sys.color.ohos_id_list_background_color'))
         .divider({
           endMargin: 8,
           startMargin: 8,
-          strokeWidth: 1,
-          color: $r('sys.color.ohos_id_divider_color')
+          strokeWidth: 0.5,
+          color: $r('sys.color.comp_divider')
         });
       };
     }
     .hideBackButton(true)
+    .backgroundColor(Color.Transparent)
     .onReady(async (ctx: NavDestinationContext) => {
       if (ctx.pathInfo.param !== undefined) {
         this.origFolder = ctx.pathInfo.param as string;

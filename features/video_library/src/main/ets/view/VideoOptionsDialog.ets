@@ -150,32 +150,6 @@ export struct VideoOptionsDialog {
 
   build() {
     Column({ space: 16 }) {
-      // Row({ space: 16 }) {
-      //   Column() {
-      //     this.optionIconBuilder($r('app.media.arrow_right_up_and_square'), '小窗播放');
-      //   }
-      //   .width(40)
-      //   .height(65)
-      //   .onClick(async () => {
-      //     const context = this.getUIContext().getHostContext() as Context;
-      //     await this.videoPlayerVM.startPip(context);
-      //     this.mainPageStack.pop();
-      //     this.controller.close();
-      //   });
-      //
-      //   Column() {
-      //     this.optionIconBuilder($r('app.media.rectangle_and_arrowshape_turn_up_right'), '系统投播');
-      //   }
-      //   .width(40)
-      //   .height(65)
-      //   .onClick(() => {
-      //     // todo
-      //   });
-      // }
-      // .width('100%')
-      // .justifyContent(FlexAlign.Start)
-      // .alignItems(VerticalAlign.Center);
-
       List() {
         ListItem() {
           Row() {

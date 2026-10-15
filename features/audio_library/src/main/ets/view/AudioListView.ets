@@ -184,7 +184,7 @@ struct ListView {
       Row() {
         Text('添加到歌单')
           .fontSize(14)
-          .fontColor(Color.Black);
+          .fontColor($r('sys.color.font_primary'));
       }
       .width('100%')
       .padding({ top: 16, bottom: 16 })
@@ -214,7 +214,7 @@ struct ListView {
         Row() {
           Text('从歌单中移除')
             .fontSize(14)
-            .fontColor(Color.Black);
+            .fontColor($r('sys.color.font_primary'));
         }
         .width('100%')
         .padding({ top: 16, bottom: 16 })
@@ -232,12 +232,11 @@ struct ListView {
       Row() {
         Text('编辑')
           .fontSize(14)
-          .fontColor(Color.Black);
+          .fontColor($r('sys.color.font_primary'));
       }
       .width('100%')
       .padding({ top: 16, bottom: 16 })
       .onClick(async () => {
-        // todo
         setTimeout(() => {
           if (this.selectedItem) {
             this.audioEditDialogController = new CustomDialogController({
@@ -317,9 +316,11 @@ struct ListView {
       }
       .width('100%')
       .height('100%')
-      .contentEndOffset(60)
+      .contentEndOffset(72)
+      .contentStartOffset(8)
       .scrollBar(BarState.Off)
-      .divider({ strokeWidth: 8, color: '#F1F3F5' })
+      .backgroundColor($r('sys.color.background_secondary'))
+      .divider({ strokeWidth: 8, color: $r('sys.color.background_secondary') })
       .lanes(this.audioViewOptions === ViewOptionValue.LIST_VIEW ? 1 : 2, 8);
     }
     .width('100%')

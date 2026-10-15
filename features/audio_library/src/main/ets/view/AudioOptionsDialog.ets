@@ -32,11 +32,12 @@ export struct AudioOptionsDialog {
     Row({ space: 12 }) {
       Image(icon)
         .width(24)
-        .aspectRatio(1);
+        .aspectRatio(1)
+        .fillColor($r('sys.color.font_primary'));
 
       Text(text)
         .fontSize(14)
-        .fontColor(Color.Black);
+        .fontColor($r('sys.color.font_primary'));
     }
     .justifyContent(FlexAlign.Start)
     .alignItems(VerticalAlign.Center)
@@ -58,7 +59,11 @@ export struct AudioOptionsDialog {
             Text(entry[1])
               .fontSize(10)
               .textAlign(TextAlign.Center)
-              .fontColor(this.audioPlayerVM.playbackSpeed === entry[0] ? '#FF007DFF' : Color.Gray);
+              .fontColor(
+                this.audioPlayerVM.playbackSpeed === entry[0] ?
+                  $r('sys.color.font_emphasize') :
+                  $r('sys.color.font_tertiary')
+              );
           }
           .width(40)
           .onClick(() => {
@@ -71,7 +76,7 @@ export struct AudioOptionsDialog {
     .width('50%')
     .scrollBar(BarState.Off)
     .listDirection(Axis.Horizontal)
-    .divider({ strokeWidth: 0.5, color: Color.Gray })
+    .divider({ strokeWidth: 0.5, color: $r('sys.color.comp_divider') })
     .onAppear(() => {
       const speedIdx = Array.from(PLAYBACK_SPEED_MAP.keys()).findIndex((playbackSpeed: media.PlaybackSpeed) => {
         return this.audioPlayerVM.playbackSpeed === playbackSpeed;
@@ -98,8 +103,8 @@ export struct AudioOptionsDialog {
         }
 
         Text(this.audioPlayerVM.currAudioItem?.title)
-          .fontSize(12)
-          .fontColor(Color.Black);
+          .fontSize(14)
+          .fontColor($r('sys.color.font_primary'));
       }
       .width('100%')
       .layoutWeight(0)
@@ -182,19 +187,6 @@ export struct AudioOptionsDialog {
 
         ListItem() {
           Row() {
-            this.optionItemBuilder($r('app.media.square_grid_2x2'), '播放器样式');
-          }
-          .width('100%')
-          .alignItems(VerticalAlign.Center)
-          .justifyContent(FlexAlign.SpaceBetween);
-        }
-        .width('100%')
-        .onClick(() => {
-          // todo
-        });
-
-        ListItem() {
-          Row() {
             this.optionItemBuilder($r('app.media.rectangle_rotate'), '横屏模式');
           }
           .width('100%')
@@ -207,19 +199,6 @@ export struct AudioOptionsDialog {
           this.audioPlayerVM.setWindowOrientation(context, window.Orientation.LANDSCAPE);
           this.mainPageStack.pushPath({ name: 'AudioLandscape' });
           this.controller.close();
-        });
-
-        ListItem() {
-          Row() {
-            this.optionItemBuilder($r('app.media.rectangle_and_arrowshape_turn_up_right'), '系统投播');
-          }
-          .width('100%')
-          .alignItems(VerticalAlign.Center)
-          .justifyContent(FlexAlign.SpaceBetween);
-        }
-        .width('100%')
-        .onClick(() => {
-          // todo
         });
 
         ListItem() {
@@ -275,13 +254,12 @@ export struct AudioOptionsDialog {
       .contentEndOffset(8)
       .contentStartOffset(8)
       .scrollBar(BarState.Off)
-      .divider({ strokeWidth: 0.5, startMargin: 46, color: '#33182431' });
+      .divider({ strokeWidth: 0.5, startMargin: 46, color: $r('sys.color.comp_divider') });
 
     }
     .padding(16)
     .width('100%')
     .height('100%')
-    .backgroundColor('#F1F3F5')
     .justifyContent(FlexAlign.Start)
     .alignItems(HorizontalAlign.Center);
   }

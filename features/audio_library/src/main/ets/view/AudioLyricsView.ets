@@ -14,8 +14,8 @@ export struct AudioLyricsView {
         Column() {
           Text('暂无歌词')
             .fontSize(32)
-            .fontColor(Color.Black)
-            .fontWeight(FontWeight.Bold);
+            .fontWeight(FontWeight.Bold)
+            .fontColor($r('sys.color.font_primary'));
         }
         .layoutWeight(1)
         .justifyContent(FlexAlign.Center)
@@ -24,11 +24,11 @@ export struct AudioLyricsView {
         Column({ space: 5 }) {
           Text(this.audioPlayerVM.currAudioItem?.title)
             .fontSize(24)
-            .fontColor(Color.Black)
-            .fontWeight(FontWeight.Bold);
+            .fontWeight(FontWeight.Bold)
+            .fontColor($r('sys.color.font_primary'));
           Text(this.audioPlayerVM.currAudioItem?.artist)
             .fontSize(14)
-            .fontColor(Color.Black);
+            .fontColor($r('sys.color.font_primary'));
         }
         .width('100%')
         .justifyContent(FlexAlign.Start)
@@ -43,7 +43,11 @@ export struct AudioLyricsView {
                   Text(lyrics.text)
                     .textAlign(TextAlign.Center)
                     .fontSize(this.audioPlayerVM.currLyricsIdx === index ? 18 : 14)
-                    .fontColor(this.audioPlayerVM.currLyricsIdx === index ? Color.Black : Color.Gray);
+                    .fontColor(
+                      this.audioPlayerVM.currLyricsIdx === index ?
+                        $r('sys.color.font_primary') :
+                        $r('sys.color.font_tertiary')
+                    );
                 }
                 .width('100%')
                 .justifyContent(FlexAlign.Center);

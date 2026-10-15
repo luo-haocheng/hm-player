@@ -47,7 +47,6 @@ export struct AudioBoxView {
         .aspectRatio(1)
         .layoutWeight(0)
         .borderRadius(12)
-        .backgroundColor(Color.White)
         .justifyContent(FlexAlign.Center)
         .alignItems(VerticalAlign.Center);
 
@@ -60,19 +59,35 @@ export struct AudioBoxView {
             Text(this.audioItem.title)
               .maxLines(1)
               .fontSize(14)
-              .fontColor(this.audioItem.id === this.audioPlayerVM.currAudioItem?.id ? '#FF007DFF' : Color.Black)
+              .fontColor(
+                this.audioItem.id === this.audioPlayerVM.currAudioItem?.id ?
+                  $r('sys.color.font_emphasize') :
+                  $r('sys.color.font_primary')
+              )
               .textOverflow({ overflow: TextOverflow.Ellipsis });
 
             Row() {
               Text(this.audioItem.artist)
                 .fontSize(12)
-                .fontColor(this.audioItem.id === this.audioPlayerVM.currAudioItem?.id ? '#FF007DFF' : Color.Gray);
+                .fontColor(
+                  this.audioItem.id === this.audioPlayerVM.currAudioItem?.id ?
+                    $r('sys.color.font_emphasize') :
+                    $r('sys.color.font_primary')
+                );
               Text(' · ')
                 .fontSize(12)
-                .fontColor(this.audioItem.id === this.audioPlayerVM.currAudioItem?.id ? '#FF007DFF' : Color.Gray);
+                .fontColor(
+                  this.audioItem.id === this.audioPlayerVM.currAudioItem?.id ?
+                    $r('sys.color.font_emphasize') :
+                    $r('sys.color.font_primary')
+                );
               Text(this.audioItem.album)
                 .fontSize(12)
-                .fontColor(this.audioItem.id === this.audioPlayerVM.currAudioItem?.id ? '#FF007DFF' : Color.Gray);
+                .fontColor(
+                  this.audioItem.id === this.audioPlayerVM.currAudioItem?.id ?
+                    $r('sys.color.font_emphasize') :
+                    $r('sys.color.font_primary')
+                );
             }
             .width('100%');
           }
@@ -110,7 +125,7 @@ export struct AudioBoxView {
       .height(80)
       .width('100%')
       .borderRadius(12)
-      .backgroundColor(Color.White);
+      .backgroundColor($r('sys.color.comp_background_list_card'));
     } else {
       Flex({
         direction: FlexDirection.Column,
@@ -139,7 +154,6 @@ export struct AudioBoxView {
           .width('100%')
           .aspectRatio(1)
           .layoutWeight(1)
-          .backgroundColor(Color.White)
           .justifyContent(FlexAlign.Center)
           .alignItems(VerticalAlign.Center)
           .borderRadius({ topLeft: 12, topRight: 12 });
@@ -172,13 +186,21 @@ export struct AudioBoxView {
               .maxLines(1)
               .fontSize(14)
               .textAlign(TextAlign.Center)
-              .fontColor(this.audioItem.id === this.audioPlayerVM.currAudioItem?.id ? '#FF007DFF' : Color.Black)
+              .fontColor(
+                this.audioItem.id === this.audioPlayerVM.currAudioItem?.id ?
+                  $r('sys.color.font_emphasize') :
+                  $r('sys.color.font_primary')
+              )
               .textOverflow({ overflow: TextOverflow.Ellipsis });
 
             Text(this.audioItem.artist)
               .fontSize(12)
               .textAlign(TextAlign.Center)
-              .fontColor(this.audioItem.id === this.audioPlayerVM.currAudioItem?.id ? '#FF007DFF' : Color.Gray);
+              .fontColor(
+                this.audioItem.id === this.audioPlayerVM.currAudioItem?.id ?
+                  $r('sys.color.font_emphasize') :
+                  $r('sys.color.font_primary')
+              );
           }
           .width('100%')
           .height('100%')
@@ -191,7 +213,7 @@ export struct AudioBoxView {
       .width('100%')
       .borderRadius(12)
       .padding({ bottom: 8 })
-      .backgroundColor(Color.White);
+      .backgroundColor($r('sys.color.comp_background_list_card'));
     }
   }
 }

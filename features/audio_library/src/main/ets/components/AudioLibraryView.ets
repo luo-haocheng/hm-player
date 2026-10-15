@@ -27,7 +27,6 @@ const IMPORT_OPTS: ImportOption[] = [
   { icon: $r('app.media.music'), text: '音频文件导入', color: Color.Blue },
   { icon: $r('app.media.folder'), text: '文件管理导入', color: Color.Orange },
   { icon: $r('app.media.download_folder'), text: '下载目录导入', color: Color.Red },
-  { icon: $r('app.media.question_circle'), text: '导入疑问', color: Color.Gray },
 ];
 
 interface ImportOption {
@@ -72,14 +71,16 @@ export struct AudioLibraryView {
 
       Text(option.text)
         .fontSize(16)
-        .fontWeight(FontWeight.Normal);
+        .fontWeight(FontWeight.Normal)
+        .fontColor($r('sys.color.font_primary'));
 
       Blank();
 
       Image($r('app.media.chevron_right'))
         .width(12)
         .aspectRatio(1)
-        .backgroundColor(Color.Transparent);
+        .backgroundColor(Color.Transparent)
+        .fillColor($r('sys.color.font_primary'));
     }
     .width('100%')
     .padding({ top: 12, bottom: 12 });
@@ -97,10 +98,10 @@ export struct AudioLibraryView {
           Image($r('app.media.xmark'))
             .width(20)
             .aspectRatio(1)
-            .fillColor(Color.Black);
+            .fillColor($r('sys.color.font_primary'));
         }
         .padding(8)
-        .backgroundColor('#AADCDCDC')
+        .backgroundColor($r('sys.color.button_background_color_transparent'))
         .onClick(() => {
           try {
             this.getUIContext().getPromptAction().closeCustomDialog(this.importDialogId);
@@ -183,23 +184,10 @@ export struct AudioLibraryView {
           let context = this.getUIContext().getHostContext() as Context;
           this.audioLibVM.importAudioFromDownloadDir(context);
         });
-
-
-        ListItem() {
-          this.importOptionBuilder(IMPORT_OPTS[4]);
-        }
-        .onClick(() => {
-          try {
-            this.getUIContext().getPromptAction().closeCustomDialog(this.importDialogId);
-          } catch (error) {
-            console.error(`Failed to closeCustomDailog. Cause: ${JSON.stringify(error)}`);
-          }
-          // todo
-        });
       }
       .width('100%')
       .scrollBar(BarState.Off)
-      .divider({ strokeWidth: 1, startMargin: 46, color: 'rgb(240, 240, 240)' });
+      .divider({ strokeWidth: 0.5, startMargin: 46, color: $r('sys.color.comp_divider') });
     }
     .padding(16);
   }
@@ -209,12 +197,13 @@ export struct AudioLibraryView {
     Row() {
       Text('排序方式')
         .fontSize(14)
-        .fontColor(Color.Black);
+        .fontColor($r('sys.color.font_primary'));
 
       Image(this.isSortExpand ? $r('app.media.chevron_up') : $r('app.media.chevron_down'))
         .width(20)
         .aspectRatio(1)
-        .backgroundColor(Color.Transparent);
+        .backgroundColor(Color.Transparent)
+        .fillColor($r('sys.color.font_primary'));
     }
     .width('100%')
     .padding({ top: 16, bottom: 16 })
@@ -233,7 +222,7 @@ export struct AudioLibraryView {
       Row({ space: 8 }) {
         Text('标题')
           .fontSize(14)
-          .fontColor(Color.Black);
+          .fontColor($r('sys.color.font_primary'));
 
         if (this.audioLibVM.audioSortMode === SortModeValue.AUDIO_TITLE) {
           Image(
@@ -243,7 +232,8 @@ export struct AudioLibraryView {
           )
             .width(20)
             .aspectRatio(1)
-            .backgroundColor(Color.Transparent);
+            .backgroundColor(Color.Transparent)
+            .fillColor($r('sys.color.font_primary'));
         }
       }
       .width('100%')
@@ -251,9 +241,9 @@ export struct AudioLibraryView {
     }
     .width('100%')
     .margin({ left: 16 })
-    .borderColor('#DCDCDC')
-    .borderWidth({ bottom: 0.5 })
     .padding({ bottom: 16 })
+    .borderWidth({ bottom: 0.5 })
+    .borderColor($r('sys.color.comp_divider'))
     .onClick(() => {
       this.audioLibVM.selectAudioSortMethod(SortModeValue.AUDIO_TITLE);
     });
@@ -262,7 +252,7 @@ export struct AudioLibraryView {
       Row({ space: 8 }) {
         Text('创建时间')
           .fontSize(14)
-          .fontColor(Color.Black);
+          .fontColor($r('sys.color.font_primary'));
 
         if (this.audioLibVM.audioSortMode === SortModeValue.DATE_ADD) {
           Image(
@@ -272,7 +262,8 @@ export struct AudioLibraryView {
           )
             .width(20)
             .aspectRatio(1)
-            .backgroundColor(Color.Transparent);
+            .backgroundColor(Color.Transparent)
+            .fillColor($r('sys.color.font_primary'));
         }
       }
       .width('100%')
@@ -280,7 +271,7 @@ export struct AudioLibraryView {
     }
     .width('100%')
     .margin({ left: 16 })
-    .borderColor('#DCDCDC')
+    .borderColor($r('sys.color.comp_divider'))
     .padding({ top: 16, bottom: 16 })
     .onClick(() => {
       this.audioLibVM.selectAudioSortMethod(SortModeValue.DATE_ADD);
@@ -293,7 +284,7 @@ export struct AudioLibraryView {
       Row({ space: 8 }) {
         Text('名称')
           .fontSize(14)
-          .fontColor(Color.Black);
+          .fontColor($r('sys.color.font_primary'));
 
         if (this.audioLibVM.playlistSortMode === SortModeValue.PLAYLIST_NAME) {
           Image(
@@ -303,7 +294,8 @@ export struct AudioLibraryView {
           )
             .width(20)
             .aspectRatio(1)
-            .backgroundColor(Color.Transparent);
+            .backgroundColor(Color.Transparent)
+            .fillColor($r('sys.color.font_primary'));
         }
       }
       .width('100%')
@@ -311,9 +303,9 @@ export struct AudioLibraryView {
     }
     .width('100%')
     .margin({ left: 16 })
-    .borderColor('#DCDCDC')
-    .borderWidth({ bottom: 0.5 })
     .padding({ bottom: 16 })
+    .borderWidth({ bottom: 0.5 })
+    .borderColor($r('sys.color.comp_divider'))
     .onClick(() => {
       this.audioLibVM.selectPlaylistSortMethod(SortModeValue.PLAYLIST_NAME);
     });
@@ -322,7 +314,7 @@ export struct AudioLibraryView {
       Row({ space: 8 }) {
         Text('创建时间')
           .fontSize(14)
-          .fontColor(Color.Black);
+          .fontColor($r('sys.color.font_primary'));
 
         if (this.audioLibVM.playlistSortMode === SortModeValue.DATE_ADD) {
           Image(
@@ -332,7 +324,8 @@ export struct AudioLibraryView {
           )
             .width(20)
             .aspectRatio(1)
-            .backgroundColor(Color.Transparent);
+            .backgroundColor(Color.Transparent)
+            .fillColor($r('sys.color.font_primary'));
         }
       }
       .width('100%')
@@ -340,8 +333,8 @@ export struct AudioLibraryView {
     }
     .width('100%')
     .margin({ left: 16 })
-    .borderColor('#DCDCDC')
     .padding({ top: 16, bottom: 16 })
+    .borderColor($r('sys.color.comp_divider'))
     .onClick(() => {
       this.audioLibVM.selectPlaylistSortMethod(SortModeValue.DATE_ADD);
     });
@@ -354,7 +347,7 @@ export struct AudioLibraryView {
         Row() {
           Text(this.audioViewOptions === ViewOptionValue.LIST_VIEW ? '宫格视图' : '列表视图')
             .fontSize(14)
-            .fontColor(Color.Black);
+            .fontColor($r('sys.color.font_primary'));
         }
         .width('100%')
         .justifyContent(FlexAlign.Start);
@@ -390,10 +383,9 @@ export struct AudioLibraryView {
     .width(200)
     .divider({
       strokeWidth: 0.5,
-      color: '#DCDCDC'
+      color: $r('sys.color.comp_divider'),
     })
-    .padding({ left: 8, right: 8 })
-    .backgroundColor(Color.White);
+    .padding({ left: 8, right: 8 });
   }
 
   @Builder
@@ -492,7 +484,7 @@ export struct AudioLibraryView {
   }
 
   @Builder
-  ChoiceOptionBuilder(icon: ResourceStr, name: ResourceStr, color: Color, callback: Callback<void>) {
+  ChoiceOptionBuilder(icon: ResourceStr, name: ResourceStr, color: ResourceColor, callback: Callback<void>) {
     Column({ space: 2 }) {
       Image(icon)
         .width(24)
@@ -514,46 +506,50 @@ export struct AudioLibraryView {
   @Builder
   multiChoiceBuilder() {
     Row() {
-      this.ChoiceOptionBuilder($r('app.media.trash'), '删除', Color.Red, () => {
-        emitter.emit(DELETE_CHOICE_EVENT);
-        try {
-          this.getUIContext().getPromptAction().closeCustomDialog(this.multiChoiceDialogId);
-        } catch (error) {
-          console.error(`Failed to closeCustomDailog. Cause: ${JSON.stringify(error)}`);
-        }
-      });
-
-      if (
-        this.currAudioList?.type === AudioListType.PLAY_LIST &&
-          ![ALL_AUDIO, FAVORITE_AUDIO].includes(this.currAudioList.name ?? '')
-      ) {
-        this.ChoiceOptionBuilder($r('app.media.remove_songlist'), '从歌单移除', Color.Black, () => {
-          emitter.emit(DELETE_PLAYLIST_CHOICE_EVENT);
+      this.ChoiceOptionBuilder($r('app.media.trash'), '删除', Color.Red,
+        () => {
+          emitter.emit(DELETE_CHOICE_EVENT);
           try {
             this.getUIContext().getPromptAction().closeCustomDialog(this.multiChoiceDialogId);
           } catch (error) {
             console.error(`Failed to closeCustomDailog. Cause: ${JSON.stringify(error)}`);
           }
         });
+
+      if (
+        this.currAudioList?.type === AudioListType.PLAY_LIST &&
+          ![ALL_AUDIO, FAVORITE_AUDIO].includes(this.currAudioList.name ?? '')
+      ) {
+        this.ChoiceOptionBuilder($r('app.media.remove_songlist'), '从歌单移除', $r('sys.color.font_primary'),
+          () => {
+            emitter.emit(DELETE_PLAYLIST_CHOICE_EVENT);
+            try {
+              this.getUIContext().getPromptAction().closeCustomDialog(this.multiChoiceDialogId);
+            } catch (error) {
+              console.error(`Failed to closeCustomDailog. Cause: ${JSON.stringify(error)}`);
+            }
+          });
       }
 
-      this.ChoiceOptionBuilder($r('app.media.music_note_list'), '添加到歌单', Color.Black, () => {
-        emitter.emit(ADD_PLAYLIST_CHOICE_EVENT);
-        try {
-          this.getUIContext().getPromptAction().closeCustomDialog(this.multiChoiceDialogId);
-        } catch (error) {
-          console.error(`Failed to closeCustomDailog. Cause: ${JSON.stringify(error)}`);
-        }
-      });
+      this.ChoiceOptionBuilder($r('app.media.music_note_list'), '添加到歌单', $r('sys.color.font_primary'),
+        () => {
+          emitter.emit(ADD_PLAYLIST_CHOICE_EVENT);
+          try {
+            this.getUIContext().getPromptAction().closeCustomDialog(this.multiChoiceDialogId);
+          } catch (error) {
+            console.error(`Failed to closeCustomDailog. Cause: ${JSON.stringify(error)}`);
+          }
+        });
 
-      this.ChoiceOptionBuilder($r('app.media.share'), '分享', Color.Black, () => {
-        // todo
-        try {
-          this.getUIContext().getPromptAction().closeCustomDialog(this.multiChoiceDialogId);
-        } catch (error) {
-          console.error(`Failed to closeCustomDailog. Cause: ${JSON.stringify(error)}`);
-        }
-      });
+      this.ChoiceOptionBuilder($r('app.media.share'), '分享', $r('sys.color.font_primary'),
+        () => {
+          // todo
+          try {
+            this.getUIContext().getPromptAction().closeCustomDialog(this.multiChoiceDialogId);
+          } catch (error) {
+            console.error(`Failed to closeCustomDailog. Cause: ${JSON.stringify(error)}`);
+          }
+        });
     }
     .width('100%')
     .height('100%')
@@ -576,11 +572,11 @@ export struct AudioLibraryView {
                 Image($r('app.media.back'))
                   .width(14)
                   .aspectRatio(1)
-                  .fillColor(Color.Black);
+                  .fillColor($r('sys.color.font_primary'));
               }
               .width(36)
               .aspectRatio(1)
-              .backgroundColor('#AADCDCDC')
+              .backgroundColor($r('sys.color.background_tertiary'))
               .onClick(() => {
                 this.audioTabStack.pop();
               });
@@ -590,8 +586,8 @@ export struct AudioLibraryView {
               .maxLines(1)
               .fontSize(20)
               .layoutWeight(1)
-              .fontColor(Color.Black)
               .fontWeight(FontWeight.Bold)
+              .fontColor($r('sys.color.font_primary'))
               .textOverflow({ overflow: TextOverflow.Ellipsis });
           }
           .layoutWeight(1);
@@ -601,11 +597,11 @@ export struct AudioLibraryView {
               Button({ type: ButtonType.Capsule, stateEffect: false }) {
                 Text('多选')
                   .fontSize(14)
-                  .fontColor(Color.Black);
+                  .fontColor($r('sys.color.font_primary'));
               }
               .width(36 * 1.5)
               .aspectRatio(1.5)
-              .backgroundColor('#AADCDCDC')
+              .backgroundColor($r('sys.color.background_tertiary'))
               .onClick(() => {
                 this.getUIContext()
                   .getPromptAction()
@@ -642,11 +638,11 @@ export struct AudioLibraryView {
               Image($r('app.media.plus'))
                 .width(24)
                 .aspectRatio(1)
-                .fillColor(Color.Black);
+                .fillColor($r('sys.color.font_primary'));
             }
             .width(36)
             .aspectRatio(1)
-            .backgroundColor('#AADCDCDC')
+            .backgroundColor($r('sys.color.background_tertiary'))
             .onClick(() => {
               this.getUIContext()
                 .getPromptAction()
@@ -671,11 +667,11 @@ export struct AudioLibraryView {
               Image($r('app.media.dot_grid_2x2'))
                 .width(24)
                 .aspectRatio(1)
-                .fillColor(Color.Black);
+                .fillColor($r('sys.color.font_primary'));
             }
             .width(36)
             .aspectRatio(1)
-            .backgroundColor('#AADCDCDC')
+            .backgroundColor($r('sys.color.background_tertiary'))
             .bindMenu(
               this.moreOptionsBuilder,
               {
@@ -702,11 +698,11 @@ export struct AudioLibraryView {
               Image($r('app.media.xmark'))
                 .width(24)
                 .aspectRatio(1)
-                .fillColor(Color.Black);
+                .fillColor($r('sys.color.font_primary'));
             }
             .width(36)
             .aspectRatio(1)
-            .backgroundColor('#AADCDCDC')
+            .backgroundColor($r('sys.color.background_tertiary'))
             .onClick(() => {
               try {
                 this.getUIContext().getPromptAction().closeCustomDialog(this.multiChoiceDialogId);
@@ -717,18 +713,18 @@ export struct AudioLibraryView {
 
             Text(this.choiceCount === 0 ? '未选择' : `已选择 ${this.choiceCount} 项`)
               .fontSize(18)
-              .fontColor(Color.Black)
-              .fontWeight(FontWeight.Bold);
+              .fontWeight(FontWeight.Bold)
+              .fontColor($r('sys.color.font_primary'));
           };
 
           Button({ type: ButtonType.Capsule, stateEffect: false }) {
             Text(this.choiceAll ? '全选' : '取消全选')
               .fontSize(14)
-              .fontColor(Color.Black);
+              .fontColor($r('sys.color.font_primary'));
           }
           .width(36 * (this.choiceAll ? 1.5 : 2))
           .aspectRatio(this.choiceAll ? 1.5 : 2)
-          .backgroundColor('#AADCDCDC')
+          .backgroundColor($r('sys.color.background_tertiary'))
           .onClick(() => {
             emitter.emit(CHOICE_ALL_EVENT);
           });
@@ -795,7 +791,7 @@ export struct AudioLibraryView {
 
         Row() {
           AudioBottomBar()
-            .margin({ left: 8, right: 8 });
+            .margin({ left: 8, right: 8, bottom: 8 });
         }
         .height(60)
         .width('100%');

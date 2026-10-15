@@ -144,7 +144,6 @@ export struct ShutdownDialog {
         .borderRadius(8)
         .scrollBar(BarState.Off)
         .listDirection(Axis.Horizontal)
-        .backgroundColor($r('sys.color.background_tertiary'))
         .divider({
           color: $r('sys.color.comp_divider'),
           strokeWidth: 0.5,

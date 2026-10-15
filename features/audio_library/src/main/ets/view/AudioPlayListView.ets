@@ -117,7 +117,7 @@ struct ListView {
       Row() {
         Text('编辑')
           .fontSize(14)
-          .fontColor(Color.Black);
+          .fontColor($r('sys.color.font_primary'));
       }
       .width('100%')
       .padding({ top: 16, bottom: 16 })
@@ -152,7 +152,7 @@ struct ListView {
     }) {
       List() {
         ListItem() {
-          PlayListBoxView({ playlistVM: this.allPlaylist })
+          PlayListBoxView({ playlistVM: this.allPlaylist });
         }
         .onClick(() => {
           const audioListInfo: AudioListInfo = {
@@ -163,7 +163,7 @@ struct ListView {
         });
 
         ListItem() {
-          PlayListBoxView({ playlistVM: this.favoritePlaylist })
+          PlayListBoxView({ playlistVM: this.favoritePlaylist });
         }
         .onClick(() => {
           const audioListInfo: AudioListInfo = {
@@ -203,9 +203,11 @@ struct ListView {
       }
       .width('100%')
       .height('100%')
-      .contentEndOffset(60)
+      .contentEndOffset(72)
+      .contentStartOffset(8)
       .scrollBar(BarState.Off)
-      .divider({ strokeWidth: 8, color: '#F1F3F5' })
+      .backgroundColor($r('sys.color.background_secondary'))
+      .divider({ strokeWidth: 8, color: $r('sys.color.background_secondary') })
       .lanes(this.audioViewOptions === ViewOptionValue.LIST_VIEW ? 1 : 2, 8);
     }
     .width('100%')

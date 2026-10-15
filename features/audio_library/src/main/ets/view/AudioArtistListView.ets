@@ -93,9 +93,11 @@ struct ListView {
       }
       .width('100%')
       .height('100%')
-      .contentEndOffset(60)
+      .contentEndOffset(72)
+      .contentStartOffset(8)
       .scrollBar(BarState.Off)
-      .divider({ strokeWidth: 8, color: '#F1F3F5' })
+      .backgroundColor($r('sys.color.background_secondary'))
+      .divider({ strokeWidth: 8, color: $r('sys.color.background_secondary') })
       .lanes(this.audioViewOptions === ViewOptionValue.LIST_VIEW ? 1 : 2, 8);
     }
     .width('100%')

@@ -41,31 +41,46 @@ export struct ArtistDialog {
 
         Text(index.toString())
           .fontSize(16)
-          .fontColor(this.audioPlayerVM.currAudioItem?.id === audioItem.id ? '#FF007DFF' : Color.Gray);
+          .fontColor(
+            this.audioPlayerVM.currAudioItem?.id === audioItem.id ?
+              $r('sys.color.font_emphasize') :
+              $r('sys.color.font_tertiary')
+          );
       }
       .layoutWeight(0);
 
       Row() {
         Text(audioItem.title)
           .fontSize(14)
-          .fontColor(this.audioPlayerVM.currAudioItem?.id === audioItem.id ? '#FF007DFF' : Color.Black);
+          .fontColor(
+            this.audioPlayerVM.currAudioItem?.id === audioItem.id ?
+              $r('sys.color.font_emphasize') :
+              $r('sys.color.font_primary')
+          );
         Text(' · ')
           .fontSize(14)
-          .fontColor(this.audioPlayerVM.currAudioItem?.id === audioItem.id ? '#FF007DFF' : Color.Black);
+          .fontColor(
+            this.audioPlayerVM.currAudioItem?.id === audioItem.id ?
+              $r('sys.color.font_emphasize') :
+              $r('sys.color.font_primary')
+          );
         Text(audioItem.artist)
           .fontSize(14)
-          .fontColor(this.audioPlayerVM.currAudioItem?.id === audioItem.id ? '#FF007DFF' : Color.Black);
+          .fontColor(
+            this.audioPlayerVM.currAudioItem?.id === audioItem.id ?
+              $r('sys.color.font_emphasize') :
+              $r('sys.color.font_primary')
+          );
       }
       .height('100%')
       .layoutWeight(1)
-      .borderColor('#33182431')
       .justifyContent(FlexAlign.Start)
       .alignItems(VerticalAlign.Center)
+      .borderColor($r('sys.color.comp_divider'))
       .borderWidth({ bottom: this.audioList.length === index ? 0 : 1 });
     }
     .height(50)
     .width('100%')
-    .backgroundColor(Color.White)
     .padding({ left: 8, right: 8 });
   }
 
@@ -78,8 +93,8 @@ export struct ArtistDialog {
       Row() {
         Text(this.artist ?? '未知歌手')
           .fontSize(18)
-          .fontColor(Color.Black)
-          .fontWeight(FontWeight.Bold);
+          .fontWeight(FontWeight.Bold)
+          .fontColor($r('sys.color.font_primary'));
       }
       .width('100%')
       .layoutWeight(0)
@@ -108,8 +123,7 @@ export struct ArtistDialog {
         .borderRadius(8)
         .contentEndOffset(8)
         .contentStartOffset(8)
-        .scrollBar(BarState.Off)
-        .backgroundColor(Color.White);
+        .scrollBar(BarState.Off);
       }
       .width('100%')
       .layoutWeight(1)
@@ -118,7 +132,6 @@ export struct ArtistDialog {
     }
     .padding(16)
     .width('100%')
-    .height('100%')
-    .backgroundColor('#F1F3F5');
+    .height('100%');
   }
 }

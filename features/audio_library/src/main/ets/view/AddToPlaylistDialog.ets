@@ -24,10 +24,10 @@ export struct AddToPlaylistDialog {
           Image($r('app.media.xmark'))
             .width(20)
             .aspectRatio(1)
-            .fillColor(Color.Black);
+            .fillColor($r('sys.color.font_primary'));
         }
         .padding(8)
-        .backgroundColor('#AADCDCDC')
+        .backgroundColor($r('sys.color.button_background_color_transparent'))
         .onClick(() => {
           this.controller.close();
         });
@@ -36,10 +36,10 @@ export struct AddToPlaylistDialog {
           Image($r('app.media.checkmark'))
             .width(20)
             .aspectRatio(1)
-            .fillColor(Color.Black);
+            .fillColor($r('sys.color.font_primary'));
         }
         .padding(8)
-        .backgroundColor('#AADCDCDC')
+        .backgroundColor($r('sys.color.button_background_color_transparent'))
         .onClick(async () => {
           for (let i = 0; i < this.audioInfoList.length; ++i) {
             await this.addToPlaylistVM.addToPlaylist(this.audioInfoList[i]);
@@ -57,8 +57,7 @@ export struct AddToPlaylistDialog {
     }
     .padding(16)
     .width('100%')
-    .height('100%')
-    .backgroundColor('#FFF1F3F5');
+    .height('100%');
   };
 }
 
@@ -76,13 +75,13 @@ struct playlistBox {
         Text(this.playlistItem.playListName)
           .maxLines(1)
           .fontSize(14)
-          .fontColor(Color.Black)
+          .fontColor($r('sys.color.font_primary'))
           .fontWeight(FontWeight.Bold)
           .textOverflow({ overflow: TextOverflow.Ellipsis });
 
         Text(`${this.playlistItem.playListCount}个内容`)
           .fontSize(12)
-          .fontColor(Color.Gray);
+          .fontColor($r('sys.color.font_tertiary'));
       }
       .height('100%')
       .layoutWeight(1)
@@ -103,7 +102,6 @@ struct playlistBox {
     .padding(8)
     .height(60)
     .width('100%')
-    .backgroundColor(Color.White)
     .onClick(() => {
       this.playlistItem.isChoice = !this.playlistItem.isChoice;
     });
@@ -135,12 +133,11 @@ struct ListView {
       .contentEndOffset(8)
       .contentStartOffset(8)
       .scrollBar(BarState.Off)
-      .backgroundColor(Color.White)
       .divider({
+        strokeWidth: 0.5,
         startMargin: 8,
         endMargin: 8,
-        strokeWidth: 1,
-        color: '#33182431'
+        color: $r('sys.color.comp_divider')
       });
     }
     .width('100%');

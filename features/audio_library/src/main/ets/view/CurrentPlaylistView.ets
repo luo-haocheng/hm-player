@@ -19,17 +19,17 @@ export struct CurrentPlaylistView {
       Row() {
         Text('当前播放列表')
           .fontSize(16)
-          .fontColor(Color.Black)
-          .fontWeight(FontWeight.Bold);
+          .fontWeight(FontWeight.Bold)
+          .fontColor($r('sys.color.font_primary'));
 
         Button({ type: ButtonType.Circle, stateEffect: false }) {
           Image($r('app.media.xmark'))
             .width(20)
             .aspectRatio(1)
-            .fillColor(Color.Black);
+            .fillColor($r('sys.color.font_primary'));
         }
         .padding(6)
-        .backgroundColor('#AADCDCDC')
+        .backgroundColor($r('sys.color.button_background_color_transparent'))
         .onClick(() => {
           this.controller.close();
         });
@@ -44,8 +44,7 @@ export struct CurrentPlaylistView {
     }
     .padding(16)
     .width('100%')
-    .height('100%')
-    .backgroundColor('#FFF1F3F5');
+    .height('100%');
   }
 }
 
@@ -69,31 +68,46 @@ struct ListView {
 
         Text(index.toString())
           .fontSize(16)
-          .fontColor(this.audioPlayerVM.currAudioItem === audioItem ? '#FF007DFF' : Color.Gray);
+          .fontColor(
+            this.audioPlayerVM.currAudioItem === audioItem ?
+              $r('sys.color.font_emphasize') :
+              $r('sys.color.font_tertiary')
+          );
       }
       .layoutWeight(0);
 
       Row() {
         Text(audioItem.title)
           .fontSize(14)
-          .fontColor(this.audioPlayerVM.currAudioItem === audioItem ? '#FF007DFF' : Color.Black);
+          .fontColor(
+            this.audioPlayerVM.currAudioItem === audioItem ?
+              $r('sys.color.font_emphasize') :
+              $r('sys.color.font_primary')
+          );
         Text(' · ')
           .fontSize(14)
-          .fontColor(this.audioPlayerVM.currAudioItem === audioItem ? '#FF007DFF' : Color.Black);
+          .fontColor(
+            this.audioPlayerVM.currAudioItem === audioItem ?
+              $r('sys.color.font_emphasize') :
+              $r('sys.color.font_primary')
+          );
         Text(audioItem.artist)
           .fontSize(14)
-          .fontColor(this.audioPlayerVM.currAudioItem === audioItem ? '#FF007DFF' : Color.Black);
+          .fontColor(
+            this.audioPlayerVM.currAudioItem === audioItem ?
+              $r('sys.color.font_emphasize') :
+              $r('sys.color.font_primary')
+          );
       }
       .height('100%')
       .layoutWeight(1)
-      .borderColor('#33182431')
-      .borderWidth({ bottom: this.audioList.length === index ? 0 : 1 })
       .justifyContent(FlexAlign.Start)
-      .alignItems(VerticalAlign.Center);
+      .alignItems(VerticalAlign.Center)
+      .borderColor($r('sys.color.comp_divider'))
+      .borderWidth({ bottom: this.audioList.length === index ? 0 : 1 });
     }
     .height(50)
     .width('100%')
-    .backgroundColor(Color.White)
     .padding({ left: 8, right: 8 });
   }
 
@@ -122,8 +136,7 @@ struct ListView {
       .borderRadius(12)
       .contentEndOffset(8)
       .contentStartOffset(8)
-      .scrollBar(BarState.Off)
-      .backgroundColor(Color.White);
+      .scrollBar(BarState.Off);
     }
     .width('100%');
   }

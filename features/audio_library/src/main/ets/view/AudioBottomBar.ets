@@ -40,7 +40,6 @@ export struct AudioBottomBar {
       .aspectRatio(1)
       .layoutWeight(0)
       .borderRadius(12)
-      .backgroundColor(Color.White)
       .justifyContent(FlexAlign.Center)
       .alignItems(VerticalAlign.Center);
 
@@ -49,19 +48,19 @@ export struct AudioBottomBar {
           Text(this.audioPlayerVM.currAudioItem.title)
             .maxLines(1)
             .fontSize(16)
-            .fontColor(Color.Black)
             .fontWeight(FontWeight.Bold)
+            .fontColor($r('sys.color.font_primary'))
             .textOverflow({ overflow: TextOverflow.Ellipsis });
 
           Text(this.audioPlayerVM.currAudioItem.artist)
             .fontSize(10)
-            .fontColor(Color.Black);
+            .fontColor($r('sys.color.font_primary'));
         } else {
           Text('未在播放')
             .maxLines(1)
             .fontSize(16)
-            .fontColor(Color.Black)
-            .fontWeight(FontWeight.Bold);
+            .fontWeight(FontWeight.Bold)
+            .fontColor($r('sys.color.font_primary'));
         }
       }
       .height('100%')
@@ -74,7 +73,7 @@ export struct AudioBottomBar {
           Image(this.audioPlayerVM.isPlaying ? $r('app.media.pause') : $r('app.media.play'))
             .width(24)
             .aspectRatio(1)
-            .fillColor(Color.Black);
+            .fillColor($r('sys.color.font_primary'));
         }
         .height('100%')
         .aspectRatio(1)
@@ -92,7 +91,7 @@ export struct AudioBottomBar {
           Image($r('app.media.music_note_list'))
             .width(24)
             .aspectRatio(1)
-            .fillColor(Color.Black);
+            .fillColor($r('sys.color.font_primary'));
         }
         .height('100%')
         .aspectRatio(1)
@@ -114,12 +113,11 @@ export struct AudioBottomBar {
       .justifyContent(FlexAlign.Start)
       .alignItems(VerticalAlign.Center);
     }
+    .padding(8)
     .width('100%')
     .height('100%')
-    .padding(8)
-    .opacity(0.8)
-    .borderRadius(12)
-    .backgroundColor(Color.Gray)
+    .borderRadius('50%')
+    .backgroundColor($r('sys.color.arc_scroll_bar_background_color'))
     .onClick(() => {
       if (this.audioPlayerVM.currAudioItem) {
         this.mainPageStack.pushPath({ name: 'AudioImmersive' });

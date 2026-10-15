@@ -23,7 +23,7 @@ export struct AudioEditDialog {
       Row() {
         Text('替换')
           .fontSize(14)
-          .fontColor(Color.Black);
+          .fontColor($r('sys.color.font_primary'));
       }
       .width('100%')
       .padding({ top: 16, bottom: 16 })
@@ -57,10 +57,10 @@ export struct AudioEditDialog {
           Image($r('app.media.xmark'))
             .width(20)
             .aspectRatio(1)
-            .fillColor(Color.Black);
+            .fillColor($r('sys.color.font_primary'));
         }
         .padding(8)
-        .backgroundColor('#AADCDCDC')
+        .backgroundColor($r('sys.color.button_background_color_transparent'))
         .onClick(() => {
           this.controller.close();
         });
@@ -69,10 +69,10 @@ export struct AudioEditDialog {
           Image($r('app.media.checkmark'))
             .width(20)
             .aspectRatio(1)
-            .fillColor(Color.Black);
+            .fillColor($r('sys.color.font_primary'));
         }
         .padding(8)
-        .backgroundColor('#AADCDCDC')
+        .backgroundColor($r('sys.color.button_background_color_transparent'))
         .onClick(async () => {
           this.controller.close();
           const context = this.getUIContext().getHostContext() as Context;
@@ -89,7 +89,7 @@ export struct AudioEditDialog {
           Column({ space: 8 }) {
             Text('封面')
               .fontSize(14)
-              .fontColor(Color.Black)
+              .fontColor($r('sys.color.font_primary'))
               .fontWeight(FontWeight.Bold);
 
             if (this.audioEditVM.albumCover) {
@@ -106,15 +106,15 @@ export struct AudioEditDialog {
                   .width('50%')
                   .aspectRatio(1)
                   .draggable(false)
-                  .fillColor('#FF007DFF')
-                  .objectFit(ImageFit.Contain);
+                  .objectFit(ImageFit.Contain)
+                  .fillColor($r('sys.color.font_emphasize'));
               }
               .width('50%')
               .aspectRatio(1)
               .borderRadius(12)
-              .backgroundColor(Color.White)
               .justifyContent(FlexAlign.Center)
               .alignItems(VerticalAlign.Center)
+              .backgroundColor($r('sys.color.background_primary'))
               .onClick(() => {
                 this.audioEditVM.selectAlbumCover();
               });
@@ -127,16 +127,16 @@ export struct AudioEditDialog {
           Column() {
             Text('标题')
               .fontSize(14)
-              .fontColor(Color.Black)
-              .fontWeight(FontWeight.Bold);
+              .fontWeight(FontWeight.Bold)
+              .fontColor($r('sys.color.font_primary'));
             TextInput({ text: $$this.audioEditVM.title })
               .fontSize(14)
               .maxLength(100)
               .showUnderline(true)
-              .underlineColor(Color.Gray)
               .placeholderFont({ size: 14 })
               .padding({ top: 8, bottom: 8 })
-              .backgroundColor(Color.Transparent);
+              .backgroundColor(Color.Transparent)
+              .underlineColor($r('sys.color.gray_04'));
           }
           .width('100%')
           .justifyContent(FlexAlign.Center)
@@ -145,16 +145,16 @@ export struct AudioEditDialog {
           Column() {
             Text('专辑')
               .fontSize(14)
-              .fontColor(Color.Black)
-              .fontWeight(FontWeight.Bold);
+              .fontWeight(FontWeight.Bold)
+              .fontColor($r('sys.color.font_primary'));
             TextInput({ text: $$this.audioEditVM.album })
               .fontSize(14)
               .maxLength(100)
               .showUnderline(true)
-              .underlineColor(Color.Gray)
               .placeholderFont({ size: 14 })
               .padding({ top: 8, bottom: 8 })
-              .backgroundColor(Color.Transparent);
+              .backgroundColor(Color.Transparent)
+              .underlineColor($r('sys.color.gray_04'));
           }
           .width('100%')
           .justifyContent(FlexAlign.Center)
@@ -163,16 +163,16 @@ export struct AudioEditDialog {
           Column() {
             Text('歌手')
               .fontSize(14)
-              .fontColor(Color.Black)
-              .fontWeight(FontWeight.Bold);
+              .fontWeight(FontWeight.Bold)
+              .fontColor($r('sys.color.font_primary'));
             TextInput({ text: $$this.audioEditVM.artist })
               .fontSize(14)
               .maxLength(100)
               .showUnderline(true)
-              .underlineColor(Color.Gray)
               .placeholderFont({ size: 14 })
               .padding({ top: 8, bottom: 8 })
-              .backgroundColor(Color.Transparent);
+              .backgroundColor(Color.Transparent)
+              .underlineColor($r('sys.color.gray_04'));
           }
           .width('100%')
           .justifyContent(FlexAlign.Center)
@@ -181,27 +181,27 @@ export struct AudioEditDialog {
           Column({ space: 8 }) {
             Text('歌词')
               .fontSize(14)
-              .fontColor(Color.Black)
-              .fontWeight(FontWeight.Bold);
+              .fontWeight(FontWeight.Bold)
+              .fontColor($r('sys.color.font_primary'));
 
             Stack({ alignContent: Alignment.TopEnd }) {
               TextArea({ text: $$this.audioEditVM.lyrics })
                 .height('100%')
                 .fontSize(14)
                 .borderWidth('1px')
-                .borderColor(Color.Gray)
                 .placeholderFont({ size: 14 })
-                .backgroundColor(Color.Transparent);
+                .backgroundColor(Color.Transparent)
+                .borderColor($r('sys.color.gray_04'));
 
               Button({ type: ButtonType.Circle, stateEffect: false }) {
                 Image($r('app.media.plus'))
                   .width(18)
                   .aspectRatio(1)
-                  .fillColor(Color.Black);
+                  .fillColor($r('sys.color.font_primary'));
               }
               .padding(6)
               .offset({ x: -8, y: 8 })
-              .backgroundColor('#DCDCDC')
+              .backgroundColor($r('sys.color.button_background_color_transparent'))
               .onClick(() => {
                 this.audioEditVM.selectLyricsFile();
               });
@@ -224,7 +224,6 @@ export struct AudioEditDialog {
     }
     .padding(16)
     .width('100%')
-    .height('100%')
-    .backgroundColor('#F1F3F5');
+    .height('100%');
   }
 }

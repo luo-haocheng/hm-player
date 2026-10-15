@@ -30,10 +30,10 @@ export struct AudioImmersiveView {
           .width(10)
           .height(5)
           .borderRadius('50%')
-          .backgroundColor(Color.Gray);
+          .backgroundColor($r('sys.color.font_tertiary'));
       } else {
         Circle({ width: 5, height: 5 })
-          .fill(Color.Gray)
+          .fill($r('sys.color.font_tertiary'))
           .fillOpacity(0.5);
       }
     }
@@ -52,10 +52,10 @@ export struct AudioImmersiveView {
           .width(10)
           .height(5)
           .borderRadius('50%')
-          .backgroundColor(Color.Gray);
+          .backgroundColor($r('sys.color.font_tertiary'));
       } else {
         Circle({ width: 5, height: 5 })
-          .fill(Color.Gray)
+          .fill($r('sys.color.font_tertiary'))
           .fillOpacity(0.5);
       }
     }
@@ -90,7 +90,7 @@ export struct AudioImmersiveView {
             Image($r('app.media.chevron_down'))
               .width(28)
               .aspectRatio(1)
-              .fillColor(Color.Gray);
+              .fillColor($r('sys.color.font_tertiary'));
           }
           .backgroundColor(Color.Transparent)
           .onClick(() => {
@@ -101,7 +101,7 @@ export struct AudioImmersiveView {
             Image($r('app.media.dot_grid_1x2'))
               .width(28)
               .aspectRatio(1)
-              .fillColor(Color.Gray);
+              .fillColor($r('sys.color.font_tertiary'));
           }
           .backgroundColor(Color.Transparent)
           .onClick(() => {
@@ -130,6 +130,6 @@ export struct AudioImmersiveView {
       bottom: this.getUIContext().px2vp(this.bottomRectHeight)
     })
     .hideBackButton(true)
-    .backgroundColor('#F1F3F5');
+    .backgroundColor($r('sys.color.background_primary'));
   }
 }

@@ -38,7 +38,6 @@ export struct PlayListBoxView {
         .aspectRatio(1)
         .layoutWeight(0)
         .borderRadius(12)
-        .backgroundColor(Color.White)
         .justifyContent(FlexAlign.Center)
         .alignItems(VerticalAlign.Center);
 
@@ -51,13 +50,13 @@ export struct PlayListBoxView {
             Text(this.playlistVM.playListName)
               .maxLines(1)
               .fontSize(16)
-              .fontColor(Color.Black)
               .fontWeight(FontWeight.Bold)
+              .fontColor($r('sys.color.font_primary'))
               .textOverflow({ overflow: TextOverflow.Ellipsis });
 
             Text(`${this.playlistVM.playListCount}个内容`)
               .fontSize(12)
-              .fontColor(Color.Gray);
+              .fontColor($r('sys.color.font_tertiary'));
           }
           .height('100%')
           .layoutWeight(1)
@@ -70,7 +69,7 @@ export struct PlayListBoxView {
       .height(80)
       .width('100%')
       .borderRadius(12)
-      .backgroundColor(Color.White);
+      .backgroundColor($r('sys.color.comp_background_list_card'));
     } else {
       Flex({
         direction: FlexDirection.Column,
@@ -100,7 +99,6 @@ export struct PlayListBoxView {
         .width('100%')
         .aspectRatio(1)
         .layoutWeight(0)
-        .backgroundColor(Color.White)
         .justifyContent(FlexAlign.Center)
         .alignItems(VerticalAlign.Center)
         .borderRadius({ topLeft: 12, topRight: 12 });
@@ -115,13 +113,13 @@ export struct PlayListBoxView {
             Text(this.playlistVM.playListName)
               .maxLines(1)
               .fontSize(16)
-              .fontColor(Color.Black)
               .fontWeight(FontWeight.Bold)
+              .fontColor($r('sys.color.font_primary'))
               .textOverflow({ overflow: TextOverflow.Ellipsis });
 
             Text(`${this.playlistVM.playListCount}个内容`)
               .fontSize(12)
-              .fontColor(Color.Gray);
+              .fontColor($r('sys.color.font_tertiary'));
           }
           .width('100%')
           .height('100%')
@@ -134,7 +132,7 @@ export struct PlayListBoxView {
       .width('100%')
       .borderRadius(12)
       .padding({ bottom: 8 })
-      .backgroundColor(Color.White);
+      .backgroundColor($r('sys.color.comp_background_list_card'));
     }
   }
 }

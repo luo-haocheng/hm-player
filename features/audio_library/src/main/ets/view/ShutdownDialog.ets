@@ -10,10 +10,13 @@ export enum ShutdownOption {
   None = 'None',
 }
 
+const BOTTOM_RECT_HEIGHT = 'BottomRectHeight';
+
 @CustomDialog
 export struct ShutdownDialog {
   @State shutdownTimeMs: number = 0;
   @Link audioPlayerVM: AudioPlayerViewModel;
+  @StorageProp(BOTTOM_RECT_HEIGHT) bottomRectHeight: number = 0;
   private intervalId: number = 0;
   private optionWidth: number = 60;
   private controller: CustomDialogController;
@@ -37,8 +40,11 @@ export struct ShutdownDialog {
     Row() {
       Text(text)
         .fontSize(10)
-        .fontColor(!this.audioPlayerVM.shutdownAfterComplete && this.audioPlayerVM.shutdownOption === option ?
-          '#FF007DFF' : Color.Gray);
+        .fontColor(
+          !this.audioPlayerVM.shutdownAfterComplete && this.audioPlayerVM.shutdownOption === option ?
+            $r('sys.color.font_emphasize') :
+            $r('sys.color.font_tertiary')
+        );
     }
     .height('100%')
     .width(this.optionWidth)
@@ -69,19 +75,19 @@ export struct ShutdownDialog {
       Row() {
         Text(this.shutdownTimeMs <= 0 ? '定时关闭' : this.shutdownTimeStr())
           .fontSize(14)
-          .fontColor(Color.Black)
-          .fontWeight(FontWeight.Bold);
+          .fontWeight(FontWeight.Bold)
+          .fontColor($r('sys.color.font_primary'));
 
         Row({ space: 3 }) {
           Text('当前视频播放完后停止')
             .fontSize(10)
-            .fontColor(Color.Gray);
+            .fontColor($r('sys.color.font_tertiary'));
 
           Toggle({ type: ToggleType.Switch, isOn: $$this.audioPlayerVM.shutdownAfterComplete })
             .width(30)
             .height(18)
-            .selectedColor('#FF007DFF')
             .switchPointColor(Color.White)
+            .selectedColor($r('sys.color.font_emphasize'))
             .onClick(() => {
               this.audioPlayerVM.shutdownOption = ShutdownOption.None;
               this.audioPlayerVM.clearShutdownDate();
@@ -122,6 +128,7 @@ export struct ShutdownDialog {
                       alignment: DialogAlignment.Bottom,
                       cornerRadius: { topLeft: 24, topRight: 24 },
                       builder: ShutdownCustomDialog({ audioPlayerVM: this.audioPlayerVM }),
+                      offset: { dx: 0, dy: this.getUIContext().px2vp(AppStorage.get(BOTTOM_RECT_HEIGHT)) },
                       onWillDisappear: () => {
                         this.shutdownTimeMs = this.audioPlayerVM.getShutdownTimeMs();
                       }
@@ -143,10 +150,9 @@ export struct ShutdownDialog {
         .width('100%')
         .borderRadius(8)
         .scrollBar(BarState.Off)
-        .backgroundColor(Color.White)
         .listDirection(Axis.Horizontal)
         .divider({
-          color: '#DCDCDC',
+          color: $r('sys.color.comp_divider'),
           strokeWidth: 0.5,
           startMargin: 8,
           endMargin: 8,
@@ -160,7 +166,6 @@ export struct ShutdownDialog {
     .padding(16)
     .width('100%')
     .height('100%')
-    .backgroundColor('#F1F3F5')
     .justifyContent(FlexAlign.Start)
     .alignItems(HorizontalAlign.Start);
   }

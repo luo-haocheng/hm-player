@@ -55,7 +55,6 @@ export struct AudioPlayerView {
         .width('100%')
         .aspectRatio(1)
         .borderRadius(12)
-        .backgroundColor(Color.White)
         .justifyContent(FlexAlign.Center)
         .alignItems(VerticalAlign.Center);
 
@@ -63,25 +62,31 @@ export struct AudioPlayerView {
           Column({ space: 5 }) {
             Text(this.audioPlayerVM.currAudioItem?.title)
               .fontSize(24)
-              .fontColor(Color.Black)
+              .fontColor($r('sys.color.font_primary'))
               .fontWeight(FontWeight.Bold);
             Text(this.audioPlayerVM.currAudioItem?.artist)
               .fontSize(14)
-              .fontColor(Color.Gray);
+              .fontColor($r('sys.color.font_tertiary'));
           }
           .justifyContent(FlexAlign.Center)
           .alignItems(HorizontalAlign.Start);
 
-          Button({ type: ButtonType.Circle, stateEffect: false }) {
-            Image(this.audioPlayerVM.isFavorite ? $r('app.media.heart_fill') : $r('app.media.heart'))
-              .width(28)
-              .aspectRatio(1)
-              .fillColor(this.audioPlayerVM.isFavorite ? Color.Black : Color.Gray);
-          }
-          .backgroundColor(Color.Transparent)
-          .onClick(async () => {
-            await this.audioPlayerVM.toggleFavorite();
-          });
+          Row({ space: 16 }) {
+            Button({ type: ButtonType.Circle, stateEffect: false }) {
+              Image(this.audioPlayerVM.isFavorite ? $r('app.media.heart_fill') : $r('app.media.heart'))
+                .width(28)
+                .aspectRatio(1)
+                .fillColor(
+                  this.audioPlayerVM.isFavorite ?
+                    $r('sys.color.font_primary') :
+                    $r('sys.color.font_tertiary')
+                );
+            }
+            .backgroundColor(Color.Transparent)
+            .onClick(async () => {
+              await this.audioPlayerVM.toggleFavorite();
+            });
+          };
         }
         .width('100%')
         .alignItems(VerticalAlign.Top)
@@ -91,7 +96,7 @@ export struct AudioPlayerView {
           Text(this.audioPlayerVM.currLyrics)
             .maxLines(1)
             .fontSize(14)
-            .fontColor(Color.Gray)
+            .fontColor($r('sys.color.font_tertiary'))
             .textOverflow({ overflow: TextOverflow.MARQUEE });
         }
         .width('100%')
@@ -114,8 +119,8 @@ export struct AudioPlayerView {
           })
             .height(24)
             .width('100%')
-            .trackColor('#22000000')
-            .selectedColor(Color.Black)
+            .selectedColor($r('sys.color.font_primary'))
+            .trackColor($r('sys.color.progress_track_color'))
             .trackThickness(this.audioPlayerVM.isSeeking ? 8 : 4)
             .onChange(async (value: number, mode: SliderChangeMode) => {
               if (mode === SliderChangeMode.Begin) {
@@ -130,11 +135,11 @@ export struct AudioPlayerView {
           Row() {
             Text(this.timeStr(this.audioPlayerVM.currTime))
               .fontSize(12)
-              .fontColor(Color.Gray);
+              .fontColor($r('sys.color.font_tertiary'));
 
             Text(this.timeStr(this.audioPlayerVM.duration))
               .fontSize(12)
-              .fontColor(Color.Gray);
+              .fontColor($r('sys.color.font_tertiary'));
           }
           .width('100%')
           .justifyContent(FlexAlign.SpaceBetween);
@@ -148,17 +153,17 @@ export struct AudioPlayerView {
               Image($r('app.media.repeat_1'))
                 .width(28)
                 .aspectRatio(1)
-                .fillColor(Color.Gray);
+                .fillColor($r('sys.color.font_tertiary'));
             } else if (this.audioPlayerVM.repeatMode === AudioRepeatMode.LIST_REPEAT) {
               Image($r('app.media.repeat'))
                 .width(28)
                 .aspectRatio(1)
-                .fillColor(Color.Gray);
+                .fillColor($r('sys.color.font_tertiary'));
             } else {
               Image($r('app.media.shuffle'))
                 .width(28)
                 .aspectRatio(1)
-                .fillColor(Color.Gray);
+                .fillColor($r('sys.color.font_tertiary'));
             }
           }
 
@@ -171,7 +176,7 @@ export struct AudioPlayerView {
             Image($r('app.media.backward_end_fill'))
               .width(36)
               .aspectRatio(1)
-              .fillColor(Color.Black);
+              .fillColor($r('sys.color.font_primary'));
           }
           .backgroundColor(Color.Transparent)
           .onClick(async () => {
@@ -183,7 +188,7 @@ export struct AudioPlayerView {
             Image(this.audioPlayerVM.isPlaying ? $r('app.media.pause') : $r('app.media.play'))
               .width(36)
               .aspectRatio(1)
-              .fillColor(Color.Black);
+              .fillColor($r('sys.color.font_primary'));
           }
           .backgroundColor(Color.Transparent)
           .onClick(async () => {
@@ -199,7 +204,7 @@ export struct AudioPlayerView {
             Image($r('app.media.forward_end_fill'))
               .width(36)
               .aspectRatio(1)
-              .fillColor(Color.Black);
+              .fillColor($r('sys.color.font_primary'));
           }
           .backgroundColor(Color.Transparent)
           .onClick(async () => {
@@ -211,7 +216,7 @@ export struct AudioPlayerView {
             Image($r('app.media.music_note_list'))
               .width(28)
               .aspectRatio(1)
-              .fillColor(Color.Gray);
+              .fillColor($r('sys.color.font_tertiary'));
           }
           .backgroundColor(Color.Transparent)
           .onClick(async () => {

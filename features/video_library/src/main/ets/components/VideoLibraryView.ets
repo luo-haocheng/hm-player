@@ -23,10 +23,10 @@ const IN_SECRET_FOLDER = 'InSecretFolder';
 const TOP_RECT_HEIGHT = 'TopRectHeight';
 const BOTTOM_RECT_HEIGHT = 'BottomRectHeight';
 const IMPORT_OPTS: ImportOption[] = [
+  { icon: $r('app.media.folder_badge_plus'), text: '创建文件夹', color: Color.Green },
   { icon: $r('app.media.picture_2'), text: '系统图库导入', color: Color.Blue },
   { icon: $r('app.media.folder'), text: '文件管理导入', color: Color.Orange },
   { icon: $r('app.media.download_folder'), text: '下载目录导入', color: Color.Red },
-  { icon: $r('app.media.folder_badge_plus'), text: '创建文件夹', color: Color.Green },
 ];
 
 interface ImportOption {
@@ -434,7 +434,7 @@ export struct VideoLibraryView {
 
       List() {
         ListItem() {
-          this.importOptionBuilder(IMPORT_OPTS[3]);
+          this.importOptionBuilder(IMPORT_OPTS[0]);
         }
         .onClick(() => {
           try {
@@ -465,7 +465,7 @@ export struct VideoLibraryView {
         });
 
         ListItem() {
-          this.importOptionBuilder(IMPORT_OPTS[0]);
+          this.importOptionBuilder(IMPORT_OPTS[1]);
         }
         .onClick(() => {
           try {
@@ -477,7 +477,7 @@ export struct VideoLibraryView {
         });
 
         ListItem() {
-          this.importOptionBuilder(IMPORT_OPTS[1]);
+          this.importOptionBuilder(IMPORT_OPTS[2]);
         }
         .onClick(() => {
           try {
@@ -489,7 +489,7 @@ export struct VideoLibraryView {
         });
 
         ListItem() {
-          this.importOptionBuilder(IMPORT_OPTS[2]);
+          this.importOptionBuilder(IMPORT_OPTS[3]);
         }
         .onClick(() => {
           try {
@@ -502,7 +502,7 @@ export struct VideoLibraryView {
       }
       .width('100%')
       .scrollBar(BarState.Off)
-      .divider({ strokeWidth: 1, startMargin: 46, color: $r('sys.color.comp_divider') });
+      .divider({ strokeWidth: 0.5, startMargin: 46, color: $r('sys.color.comp_divider') });
     }
     .padding(16);
   }
