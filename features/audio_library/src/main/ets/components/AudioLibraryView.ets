@@ -540,22 +540,12 @@ export struct AudioLibraryView {
             console.error(`Failed to closeCustomDailog. Cause: ${JSON.stringify(error)}`);
           }
         });
-
-      this.ChoiceOptionBuilder($r('app.media.share'), '分享', $r('sys.color.font_primary'),
-        () => {
-          // todo
-          try {
-            this.getUIContext().getPromptAction().closeCustomDialog(this.multiChoiceDialogId);
-          } catch (error) {
-            console.error(`Failed to closeCustomDailog. Cause: ${JSON.stringify(error)}`);
-          }
-        });
     }
     .width('100%')
     .height('100%')
     .padding({ left: 32, right: 32 })
     .alignItems(VerticalAlign.Top)
-    .justifyContent(FlexAlign.SpaceBetween);
+    .justifyContent(FlexAlign.SpaceAround);
   }
 
   build() {

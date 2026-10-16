@@ -115,21 +115,6 @@ struct ListView {
       alignItems: ItemAlign.Center,
     }) {
       Row() {
-        Text('编辑')
-          .fontSize(14)
-          .fontColor($r('sys.color.font_primary'));
-      }
-      .width('100%')
-      .padding({ top: 16, bottom: 16 })
-      .onClick(() => {
-        // todo
-      });
-
-      Divider()
-        .vertical(false)
-        .strokeWidth(0.5);
-
-      Row() {
         Text('删除')
           .fontSize(14)
           .fontColor(Color.Red);
