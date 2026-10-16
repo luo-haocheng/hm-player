@@ -12,6 +12,8 @@ import { VideoItemViewModelList } from './VideoListViewModel';
 import { VideoItemViewModel } from './VideoItemViewModel';
 import { ContinuousTaskManager } from 'util';
 import { ShutdownOption } from '../view/ShutdownDialog';
+import { avSession } from '@kit.AVSessionKit';
+import { VideoCastViewModel } from './VideoCastViewModel';
 
 const SEEK_TIME = 10000;
 const VOLUME_VALUE = 1.0;
@@ -29,6 +31,7 @@ export class VideoPlayerViewModel {
   @Track currTime: number = 0;
   @Track brightness: number = 0;
   @Track volumeLevel: number = 0;
+  @Track isCasting: boolean = false;
   @Track isPlaying: boolean = false;
   @Track isLocking: boolean = false;
   @Track isLandscape: boolean = false;
@@ -46,6 +49,7 @@ export class VideoPlayerViewModel {
   @Track videoRepeatMode: VideoRepeatMode = VideoRepeatMode.SINGLE_NON_REPEAT;
   @Track playbackSpeed: media.PlaybackSpeed = media.PlaybackSpeed.SPEED_FORWARD_1_00_X;
   private videoPlayer: AVPlayerManager = new AVPlayerManager();
+  private videoCastViewModel?: VideoCastViewModel;
   private settings: Settings = new Settings();
   private shutdownDate?: Date;
   private startSeekTime: number = 0;
@@ -154,6 +158,26 @@ export class VideoPlayerViewModel {
         this.seek(timeMs);
       }
     });
+    MediaSessionManager.getInstance()
+      .registerCallback('outputDeviceChange',
+        async (state: avSession.ConnectionState, device: avSession.OutputDeviceInfo) => {
+          const currDevice = device.devices[0];
+          if (currDevice.castCategory === avSession.AVCastCategory.CATEGORY_REMOTE &&
+            state === avSession.ConnectionState.STATE_CONNECTED) {
+            const castController = await MediaSessionManager.getInstance().getAVCastController();
+            this.videoCastViewModel = new VideoCastViewModel(castController!);
+
+            this.videoPlayer.setAVMuted(true);
+            const videoInfo = this.currVideoItem!.videoInfo;
+            await this.videoCastViewModel.setCastVideo(videoInfo, this.duration, this.currTime);
+            this.isCasting = true;
+          } else {
+            this.isCasting = false;
+            this.videoPlayer.setAVMuted(false);
+            this.videoCastViewModel?.releaseAVCast();
+            MediaSessionManager.getInstance().stopCasting();
+          }
+        });
     if (this.videoList && this.videoList.length > 1) {
       MediaSessionManager.getInstance().registerCallback('playPrevious', () => {
         if (this.isBackground && !this.isListenVideoBackground) {
@@ -189,6 +213,11 @@ export class VideoPlayerViewModel {
     }
     if (!this.videoList || this.videoList.length <= 1) {
       return;
+    }
+    if (this.isCasting) {
+      this.isCasting = false;
+      this.videoCastViewModel?.releaseAVCast();
+      MediaSessionManager.getInstance().stopCasting();
     }
 
     const currVideoId = this.currVideoItem.videoInfo.id;
@@ -229,19 +258,31 @@ export class VideoPlayerViewModel {
         if (!(await ContinuousTaskManager.hasContinuousTasks(context))) {
           await ContinuousTaskManager.startContinuousTask(context);
         }
+        if (this.isCasting) {
+          this.videoCastViewModel?.play();
+        }
         await this.videoPlayer.play();
       }
     } else {
+      if (this.isCasting) {
+        this.videoCastViewModel?.play();
+      }
       await this.videoPlayer.play();
     }
   }
 
   async pause(): Promise<void> {
+    if (this.isCasting) {
+      this.videoCastViewModel?.pause();
+    }
     await this.videoPlayer.pause();
   }
 
   seek(timeMs: number): void {
     timeMs = Math.min(this.duration, Math.max(0, timeMs));
+    if (this.isCasting) {
+      this.videoCastViewModel?.seek(timeMs);
+    }
     this.videoPlayer.seek(timeMs);
   }
 
@@ -331,7 +372,11 @@ export class VideoPlayerViewModel {
   }
 
   async release(): Promise<void> {
+    if (this.isCasting) {
+      await MediaSessionManager.getInstance().stopCasting();
+    }
     await MediaSessionManager.getInstance().release();
+    await this.videoCastViewModel?.releaseAVCast();
     await this.videoPlayer.release();
     this.reset();
   }
@@ -575,6 +620,7 @@ export class VideoPlayerViewModel {
   private reset() {
     this.duration = 0;
     this.currTime = 0;
+    this.isCasting = false;
     this.isPlaying = false;
     this.isLocking = false;
     this.isLandscape = false;

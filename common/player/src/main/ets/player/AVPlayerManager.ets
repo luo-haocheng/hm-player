@@ -41,6 +41,15 @@ export class AVPlayerManager {
     }
   }
 
+  async setAVMuted(isMuted: boolean) {
+    try {
+      await this.avPlayer?.setMediaMuted(media.MediaType.MEDIA_TYPE_AUD, isMuted);
+      await this.avPlayer?.setMediaMuted(media.MediaType.MEDIA_TYPE_AUD, isMuted);
+    } catch (error) {
+      console.info(`Failed to invoke setMediaMuted. ${JSON.stringify(error)}`);
+    }
+  }
+
   async play(): Promise<void> {
     try {
       await this.avPlayer?.play();

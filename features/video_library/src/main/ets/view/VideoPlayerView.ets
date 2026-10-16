@@ -146,6 +146,19 @@ export struct VideoPlayerView {
         .alignItems(HorizontalAlign.Center)
         .justifyContent(this.videoPlayerVM.isSpeeding ? FlexAlign.Start : FlexAlign.Center);
 
+        if (this.videoPlayerVM.isCasting) {
+          Column() {
+            Text('远端投播中')
+              .fontSize(16)
+              .fontColor(Color.White);
+          }
+          .width('100%')
+          .height('100%')
+          .backgroundColor(Color.Black)
+          .justifyContent(FlexAlign.Center)
+          .alignItems(HorizontalAlign.Center);
+        }
+
         Column() {
           Row() {
             Button({ type: ButtonType.Circle, stateEffect: false }) {

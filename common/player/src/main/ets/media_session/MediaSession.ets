@@ -25,6 +25,26 @@ export class MediaSessionManager {
     return undefined;
   }
 
+  async getAVCastController(): Promise<AVSessionMananger.AVCastController | undefined> {
+    if (this.session) {
+      try {
+        return await this.session.getAVCastController();
+      } catch (error) {
+        console.error(`Failed to invoke getAVCastController. Cause: ${JSON.stringify(error)}`);
+        return undefined;
+      }
+    }
+    return undefined;
+  }
+
+  async stopCasting() {
+    try {
+      await this.session?.stopCasting();
+    } catch (error) {
+      console.info(`Failed to invoke stopCasting. Cause: ${JSON.stringify(error)}`);
+    }
+  }
+
   async initAudioSession(context: Context): Promise<void> {
     if (this.session && this.session.sessionType === 'video') {
       try {
@@ -407,6 +427,13 @@ export class MediaSessionManager {
         if (this.callbacks.has('fastForward')) {
           const callback = this.callbacks.get('fastForward') as (timeS?: number) => void;
           callback(timeS);
+        }
+      });
+      this.session?.on('outputDeviceChange', (state, device) => {
+        if (this.callbacks.has('outputDeviceChange')) {
+          const callback = this.callbacks.get('outputDeviceChange') as
+            (state: AVSessionMananger.ConnectionState, device: AVSessionMananger.OutputDeviceInfo) => void;
+          callback(state, device);
         }
       });
       if (this.callbacks.has('playPrevious')) {
