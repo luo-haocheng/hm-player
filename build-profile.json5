@@ -22,21 +22,6 @@
       {
         "name": "release"
       }
-    ],
-    "signingConfigs": [
-      {
-        "name": "default",
-        "type": "HarmonyOS",
-        "material": {
-          "certpath": "C:\\Users\\HaoCheng Luo\\.ohos\\config\\default_HMPlayer_uKk1wMh3AWZ5zrRZ4BZsjCg7_SqFoJVhQcquXFVwNX0=.cer",
-          "keyAlias": "debugKey",
-          "keyPassword": "0000001A0486B3CB25B46FE36B643673588CF9A77AAC768D2DB3AA60977D4FA90070E6FB8C3A9FE8AAB8",
-          "profile": "C:\\Users\\HaoCheng Luo\\.ohos\\config\\default_HMPlayer_uKk1wMh3AWZ5zrRZ4BZsjCg7_SqFoJVhQcquXFVwNX0=.p7b",
-          "signAlg": "SHA256withECDSA",
-          "storeFile": "C:\\Users\\HaoCheng Luo\\.ohos\\config\\default_HMPlayer_uKk1wMh3AWZ5zrRZ4BZsjCg7_SqFoJVhQcquXFVwNX0=.p12",
-          "storePassword": "0000001A5CE6CCF2631823A00D835F657E2935775689EBD02B74B610B05F1FD000758A02C06B9333208E"
-        }
-      }
     ]
   },
   "modules": [

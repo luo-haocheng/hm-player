@@ -41,6 +41,7 @@
 <video height="480" controls>
     <source src="./screenshot/audio_screen_cap.mp4" type="video/mp4">
 </video>
+
 ---
 
 ## 项目简介
@@ -381,7 +382,6 @@ PLAYLIST_AUDIO  (PLAYLIST_NAME, AUDIO_ID, PRIMARY KEY(PLAYLIST_NAME, AUDIO_ID))
 ---
 
 ## 当前限制
-
 - 仅支持本地文件播放，未接入网络流媒体 / 在线音乐源
 - 导入格式受选择器过滤限制：音频 `.mp3` / `.m4a`，视频 `.mp4`（播放内核实际支持更多格式）
 - 播放进度未持久化：应用被系统回收后不记忆上次播放项与进度
